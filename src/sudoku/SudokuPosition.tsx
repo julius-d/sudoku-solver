@@ -1,8 +1,8 @@
 export default class SudokuPosition {
-  xKoordinate;
-  yKoordinate;
+  xKoordinate :number;
+  yKoordinate: number;
 
-  constructor(koordinate, koordinate2) {
+  constructor(koordinate: number, koordinate2: number) {
     this.xKoordinate = koordinate;
     this.yKoordinate = koordinate2;
   }
@@ -11,7 +11,7 @@ export default class SudokuPosition {
     return this.xKoordinate;
   }
 
-  setXKoordinate(koordinate) {
+  setXKoordinate(koordinate: number) {
     this.xKoordinate = koordinate;
   }
 
@@ -19,7 +19,7 @@ export default class SudokuPosition {
     return this.yKoordinate;
   }
 
-  setYKoordinate(koordinate) {
+  setYKoordinate(koordinate: number) {
     this.yKoordinate = koordinate;
   }
 

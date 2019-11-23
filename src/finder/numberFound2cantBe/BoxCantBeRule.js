@@ -1,6 +1,7 @@
 import AbstractCantBe from "./AbstractCantBe";
 import SudokuBox from "../../sudoku/SudokuBox";
 import SudokuEvent from "../../sudoku/SudokuEvent";
+import SudokuEventType from "../../sudoku/SudokuEventType";
 
 export default class BoxCantBeRule extends AbstractCantBe {
 
@@ -9,14 +10,13 @@ export default class BoxCantBeRule extends AbstractCantBe {
   }
 
   finderLogic(numberFoundEvent) {
-    console.log("HURRA");
-    console.log(numberFoundEvent);
     const result = [];
     const box = SudokuBox.createByPositon(numberFoundEvent.getPosition());
 
     for (let position of box.iterator()) {
       result.push(
-          new SudokuEvent(position, numberFoundEvent.getNumber(), this.ruleName));
+          new SudokuEvent(SudokuEventType.CANT_BE,
+              position, numberFoundEvent.getNumber(), this.ruleName));
     }
 
     return result;
