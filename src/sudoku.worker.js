@@ -3,10 +3,13 @@ import SudokuEvent from "./sudoku/SudokuEvent";
 import SudokuPosition from "./sudoku/SudokuPosition";
 import HorizontalCantBeRule
   from "./finder/numberFound2cantBe/HorizontalCantBeRule";
+import VerticalCantBeRule from "./finder/numberFound2cantBe/VerticalCantBeRule";
 
-let boxCantBeRule = new BoxCantBeRule();
-let horizontalCantBeRule = new HorizontalCantBeRule();
-let rules = [boxCantBeRule, horizontalCantBeRule];
+let rules = [
+  (new BoxCantBeRule()),
+  (new HorizontalCantBeRule()),
+  (new VerticalCantBeRule())
+];
 
 // eslint-disable-next-line no-restricted-globals
 addEventListener('message', ({data}) => {
