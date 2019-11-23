@@ -28,7 +28,13 @@ class App extends Component {
       const name = `field_${x}_${y}_not`;
 
       that.setState(function (prevState) {
-        let notArray = prevState[name].concat([value]);
+        let prevStateElement = prevState[name];
+        let notArray;
+        if (!prevStateElement.includes(value)) {
+          notArray = prevStateElement.concat([value]);
+        } else {
+          notArray = prevStateElement;
+        }
         return {[name]: notArray}
       });
     }
@@ -65,13 +71,17 @@ class App extends Component {
                   .map(
                       fieldName =>
                           <td className="tg-0lax" key={`cell_${fieldName}`}>
-                            <input type="text"
-                                   maxLength="1"
-                                   size="1"
-                                   name={fieldName}
-                                   value={this.state[fieldName] || ""}
-                                   onChange={this.handleChange}/>
-                            <br/><small>{this.state[`${fieldName}_not`].join()}</small>
+                            {this.state[fieldName] ?
+                                <strong>{this.state[fieldName]}</strong> :
+
+                                <><input type="text"
+                                         maxLength="1"
+                                         size="1"
+                                         name={fieldName}
+                                         value={""}
+                                         onChange={this.handleChange}/>
+                                <br/><strike>{this.state[`${fieldName}_not`].join()}</strike>
+                                </>}
                           </td>
                   )}
                 </tr>)}
