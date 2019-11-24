@@ -9,6 +9,8 @@ import OnePositonCantBeRule
 import SudokuEventType from "./sudoku/SudokuEventType";
 import OnlyOnePlaceHorizontalLine
   from "./finder/cantBe2NumberFound/OnlyOnePlaceHorizontalLine";
+import OnlyOnePlaceVerticalLine
+  from "./finder/cantBe2NumberFound/OnlyOnePlaceVerticalLine";
 
 let numberFound2cantBeRules = [
   (new BoxCantBeRule()),
@@ -17,9 +19,9 @@ let numberFound2cantBeRules = [
   (new OnePositonCantBeRule()),
 ];
 
-let onlyOnePlaceHorizontalLine = new OnlyOnePlaceHorizontalLine();
 let cantBe2NumberFound = [
-  (onlyOnePlaceHorizontalLine)
+  (new OnlyOnePlaceHorizontalLine()),
+  (new OnlyOnePlaceVerticalLine())
 ];
 
 // eslint-disable-next-line no-restricted-globals
