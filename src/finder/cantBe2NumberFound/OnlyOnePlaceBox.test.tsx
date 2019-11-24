@@ -27,7 +27,7 @@ describe("OnlyOnePlaceBox", () => {
     expect(sudokuEvents.length).toBe(1);
     expect(sudokuEvents[0].getNumber()).toBe(1);
     expect(sudokuEvents[0].getPosition().getXKoordinate()).toBe(2);
-    expect(sudokuEvents[0].getPosition().getYKoordinate()).toBe(8);
+    expect(sudokuEvents[0].getPosition().getYKoordinate()).toBe(0);
+  });
 
-  })
 });

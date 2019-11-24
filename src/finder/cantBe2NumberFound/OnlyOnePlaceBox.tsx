@@ -4,6 +4,11 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
+function samePosition(one: SudokuPosition, two: SudokuPosition) {
+  return one.getXKoordinate() === two.getXKoordinate()
+      && one.getYKoordinate() === two.getYKoordinate();
+}
+
 export default class OnlyOnePlaceBox extends AbstractFinder {
 
 
@@ -22,6 +27,7 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
       }
     }
     speicher.values();
+    // @ts-ignore
     for (let map of speicher.values()) {
       for (let i = 1; i <= 9; i++) {
         map.set(i, []);
@@ -34,27 +40,20 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
 
   finderLogic(cantBes: Array<SudokuEvent>) {
     const results = [];
-    const boxes: Array<SudokuBox> = [];
     for (let info of cantBes) {
       let position = info.getPosition();
       let nTNumber = info.getNumber();
       let box: SudokuBox = SudokuBox.createByPositon(position);
-      boxes.push(box);
+
       // @ts-ignore
-      this.speicher.get(box).get(nTNumber).push(position);
-    }
-
-    for (let box of boxes) {
-      //TODO: könnte man effenktiver machen, da nicht alle Zahlen gechekct werden müssen.
-
-      for (let i = 1; i <= 9; i++) {
-        // @ts-ignore
-        const notHeres = this.speicher.get(box).get(i);
-        if (notHeres && notHeres.length === 8) {
+      const notHeres = this.speicher.get(box).get(nTNumber);
+      if (notHeres && !notHeres.find(it => samePosition(position, it))) {
+        notHeres.push(position);
+        if (notHeres.length === 8) {
+          // @ts-ignore
           for (let newPos of box.iterator()) {
-            if (!notHeres.find(it => newPos.getXKoordinate() === it.getXKoordinate()
-                && newPos.getYKoordinate() === it.getYKoordinate())) {
-              results.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, newPos, i, this.name)); //FIXME
+            if (!notHeres.find(it => samePosition(newPos, it))) {
+              results.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, newPos, nTNumber, this.name)); //FIXME
             }
           }
         }
@@ -62,10 +61,6 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
 
     }
     return results;
-
   }
 
-  reset() {
-    init();
-  }
 }
