@@ -34,7 +34,7 @@ class App extends Component {
           let prevStateElement = prevState[name];
           let notArray;
           if (!prevStateElement.includes(value)) {
-            notArray = prevStateElement.concat([value]);
+            notArray = prevStateElement.concat([value]).sort();
           } else {
             notArray = prevStateElement;
           }
@@ -54,6 +54,9 @@ class App extends Component {
     const name = target.name;
     if (!(value >= 1 && value <= 9)) {
       return
+    }
+    if (this.state[name + "_not"].includes(value)) {
+      return;
     }
 
     this.setState({
