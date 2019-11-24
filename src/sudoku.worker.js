@@ -12,6 +12,7 @@ import OnlyOnePlaceHorizontalLine
 import OnlyOnePlaceVerticalLine
   from "./finder/cantBe2NumberFound/OnlyOnePlaceVerticalLine";
 import OnlyOnePlaceBox from "./finder/cantBe2NumberFound/OnlyOnePlaceBox";
+import OnePositionFinder from "./finder/cantBe2NumberFound/OnePositionFinder";
 
 let numberFound2cantBeRules = [
   (new BoxCantBeRule()),
@@ -24,6 +25,7 @@ let cantBe2NumberFound = [
   (new OnlyOnePlaceHorizontalLine()),
   (new OnlyOnePlaceVerticalLine()),
   (new OnlyOnePlaceBox()),
+  (new OnePositionFinder()),
 ];
 
 // eslint-disable-next-line no-restricted-globals

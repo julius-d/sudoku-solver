@@ -90,7 +90,9 @@ class App extends Component {
                                          size="1"
                                          name={fieldName}
                                          value={""}
-                                         onChange={this.handleChange}/>
+                                         onChange={this.handleChange}
+                                         autocomplete="off"
+                                />
                                 <br/><strike>{this.state[`${fieldName}_not`].join()}</strike>
                                 </>}
                           </td>
