@@ -2,10 +2,12 @@ import SudokuItem from "./SudokuItem";
 import SudokuPosition from "./SudokuPosition";
 
 export default class SudokuBox extends SudokuItem {
-  x;
-  y;
+  private readonly x : number;
+  private readonly y : number;
 
-  constructor(x, y) {
+  private static allInstances: SudokuBox[][] = SudokuBox.createAll();
+
+  private constructor(x: number, y: number) {
     super();
     if (x < 0 || y < 0 || x > 2 || y > 2) {
       throw new Error("illegal argument x:"+x+" y: "+y);
@@ -23,31 +25,30 @@ export default class SudokuBox extends SudokuItem {
   }
 
   getAll() {
-    const set = [];
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        set.push(new SudokuBox(x, y));
-      }
-    }
-
-    return set;
+    return SudokuBox.allInstances;
   }
 
-  static createByPositon(postion) {
+  private static createAll() {
+    const all : SudokuBox[][] = [];
+    for (let x = 0; x < 3; x++) {
+      all[x] = [];
+      for (let y = 0; y < 3; y++) {
+        all[x][y] = (new SudokuBox(x, y));
+      }
+    }
+    return all;
+  }
+
+  static createByPositon(postion: SudokuPosition) {
     let x = postion.getXKoordinate();
     let y = postion.getYKoordinate();
     x = Math.trunc(x / 3);
     y = Math.trunc(y / 3);
-    return new SudokuBox(x, y);
+    return this.allInstances[x][y] ;
   }
 
-  createItemByPositon(postion) {
-    let x = postion.getXKoordinate();
-    let y = postion.getYKoordinate();
-    x = x / 3;
-    y = y / 3;
-    let box = new SudokuBox(x, y);
-    return box;
+  static create(x: number, y: number) {
+    return this.allInstances[x][y];
   }
 
   iterator() {
@@ -57,12 +58,13 @@ export default class SudokuBox extends SudokuItem {
   toString() {
     return "Box: [" + this.x + "," + this.y + "]";
   }
+
 }
 
 class AllIntheBoxIterator {
 
-  x;
-  y;
+  x: number;
+  y: number;
   _hasNext = true;
 
   xAdd = 0;
