@@ -5,18 +5,20 @@ import SudokuEventType from "../../sudoku/SudokuEventType";
 
 export default class BoxCantBeRule extends AbstractCantBe {
 
-  constructor() {
-    super("BoxCantBeRule");
-  }
+  private ruleName = "BoxCantBeRule";
 
-  finderLogic(numberFoundEvent) {
+  finderLogic(numberFoundEvent: SudokuEvent) {
     const result = [];
     const box = SudokuBox.createByPositon(numberFoundEvent.getPosition());
 
+    // @ts-ignore
     for (let position of box.iterator()) {
-      result.push(
-          new SudokuEvent(SudokuEventType.CANT_BE,
-              position, numberFoundEvent.getNumber(), this.ruleName));
+      if (position.getYKoordinate() !== numberFoundEvent.getPosition().getYKoordinate()
+         ||  position.getXKoordinate() !== numberFoundEvent.getPosition().getXKoordinate()) {
+        result.push(
+            new SudokuEvent(SudokuEventType.CANT_BE,
+                position, numberFoundEvent.getNumber(), this.ruleName));
+      }
     }
 
     return result;

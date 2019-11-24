@@ -6,15 +6,13 @@ export default class OnePositonCantBeRule extends AbstractCantBe {
 
   name = "OnePositonCantBeRule";
 
-  constructor() {
-    super("OnePositonCantBeRule");
-  }
-
-  finderLogic(numberFoundEvent) {
+  finderLogic(numberFoundEvent : SudokuEvent) {
     const result = [];
     for (let i = 1; i <= 9; i++) {
-      result.push(new SudokuEvent(SudokuEventType.CANT_BE,
-          numberFoundEvent.getPosition(), i, this.name));
+      if (i !== numberFoundEvent.getNumber()) {
+        result.push(new SudokuEvent(SudokuEventType.CANT_BE,
+            numberFoundEvent.getPosition(), i, this.name));
+      }
     }
     return result;
   }

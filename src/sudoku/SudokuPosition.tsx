@@ -2,9 +2,9 @@ export default class SudokuPosition {
   xKoordinate :number;
   yKoordinate: number;
 
-  constructor(koordinate: number, koordinate2: number) {
-    this.xKoordinate = koordinate;
-    this.yKoordinate = koordinate2;
+  constructor(xKoordinate: number, yKoordinate: number) {
+    this.xKoordinate = xKoordinate;
+    this.yKoordinate = yKoordinate;
   }
 
   getXKoordinate() {
@@ -25,6 +25,10 @@ export default class SudokuPosition {
 
   toString() {
     return "Pos: [" + this.xKoordinate + "," + this.yKoordinate + "]";
+  }
+
+  valueOf() {
+    return "[" + this.xKoordinate + "][" + this.yKoordinate + "]";
   }
 
 }

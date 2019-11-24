@@ -41,6 +41,9 @@ addEventListener('message', ({data}) => {
   cantBe2NumberFound.forEach(rule => {
     let foundNumbers = rule.finderLogic(cantBeRulesResults);
     console.log("foundNumbers", foundNumbers);
+    foundNumbers.forEach(foundNumbers => {
+      postMessage(foundNumbers);
+    });
   });
 
   cantBeRulesResults.forEach(it => {

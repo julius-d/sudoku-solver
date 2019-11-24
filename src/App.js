@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Worker from './sudoku.worker.js';
+import SudokuEventType from "./sudoku/SudokuEventType";
 
 class App extends Component {
   constructor(props) {
@@ -25,18 +26,25 @@ class App extends Component {
       const x = e.data.position.xKoordinate;
       const y = e.data.position.yKoordinate;
       const value = e.data.number;
-      const name = `field_${x}_${y}_not`;
+      const type = e.data.type;
 
-      that.setState(function (prevState) {
-        let prevStateElement = prevState[name];
-        let notArray;
-        if (!prevStateElement.includes(value)) {
-          notArray = prevStateElement.concat([value]);
-        } else {
-          notArray = prevStateElement;
-        }
-        return {[name]: notArray}
-      });
+      if (type === SudokuEventType.CANT_BE) {
+        const name = `field_${x}_${y}_not`;
+        that.setState(function (prevState) {
+          let prevStateElement = prevState[name];
+          let notArray;
+          if (!prevStateElement.includes(value)) {
+            notArray = prevStateElement.concat([value]);
+          } else {
+            notArray = prevStateElement;
+          }
+          return {[name]: notArray}
+        });
+      } else if(type === SudokuEventType.NUMBER_FOUND){
+        const name = `field_${x}_${y}`;
+        that.setState({[name]: value});
+      }
+
     }
   };
 
