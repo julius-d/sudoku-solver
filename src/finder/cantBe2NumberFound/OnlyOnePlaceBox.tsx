@@ -51,7 +51,7 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
         notHeres.push(position);
         if (notHeres.length === 8) {
           // @ts-ignore
-          for (let newPos of box.iterator()) {
+          for (let newPos of box.allSudokuPositionInThisBox()) {
             if (!notHeres.find(it => samePosition(newPos, it))) {
               results.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, newPos, nTNumber, this.name)); //FIXME
             }
