@@ -13,6 +13,7 @@ import OnlyOnePlaceVerticalLine
   from "./finder/cantBe2NumberFound/OnlyOnePlaceVerticalLine";
 import OnlyOnePlaceBox from "./finder/cantBe2NumberFound/OnlyOnePlaceBox";
 import OnePositionFinder from "./finder/cantBe2NumberFound/OnePositionFinder";
+import EventFilter from "./sudoku/EventFilter";
 
 let numberFound2cantBeRules = [
   (new BoxCantBeRule()),
@@ -28,6 +29,8 @@ let cantBe2NumberFound = [
   (new OnePositionFinder()),
 ];
 
+let eventFilter = new EventFilter();
+
 // eslint-disable-next-line no-restricted-globals
 addEventListener('message', ({data}) => {
 
@@ -39,21 +42,30 @@ addEventListener('message', ({data}) => {
       data.value,
       "USER");
 
-  let cantBeRulesResults = [];
+  let foundNumbers = [sudokuEvent];
+  do {
+    let cantBeRulesResults = [];
+    for (const rule of numberFound2cantBeRules) {
+      for (const foundNumber of foundNumbers) {
+        cantBeRulesResults = cantBeRulesResults.concat(
+            rule.finderLogic(foundNumber));
+      }
+    }
+    cantBeRulesResults.forEach(it => {
+      postMessage(it);
+    });
 
-  numberFound2cantBeRules.forEach(
-      it => cantBeRulesResults = cantBeRulesResults.concat(it.finderLogic(sudokuEvent)));
-
-  cantBe2NumberFound.forEach(rule => {
-    let foundNumbers = rule.finderLogic(cantBeRulesResults);
-    console.log("foundNumbers", foundNumbers);
+    foundNumbers = [];
+    for (const rule of cantBe2NumberFound) {
+      foundNumbers = foundNumbers.concat(
+          rule.finderLogic(cantBeRulesResults));
+    }
+    foundNumbers = eventFilter.removeAlreadySeen(foundNumbers);
     foundNumbers.forEach(foundNumbers => {
       postMessage(foundNumbers);
     });
-  });
 
-  cantBeRulesResults.forEach(it => {
-    console.log(it);
-    postMessage(it);
-  });
+  } while (foundNumbers.length > 0)
+
+
 });
