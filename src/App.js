@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Worker from './sudoku.worker.js';
 import SudokuEventType from "./sudoku/SudokuEventType";
+import SudokuField from "./SudokuField";
 
 class App extends Component {
   constructor(props) {
@@ -73,29 +74,21 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-          <table className="tg">
+          Sudoku Löser
+           <table className="tg">
             <tbody>
             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(rowNumber =>
                 <tr key={`row_${rowNumber}`}>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8]
-                  .map(colNumber => `field_${rowNumber}_${colNumber}`)
-                  .map(
-                      fieldName =>
-                          <td className="tg-0lax" key={`cell_${fieldName}`}>
-                            {this.state[fieldName] ?
-                                <strong>{this.state[fieldName]}</strong> :
-
-                                <><input type="text"
-                                         maxLength="1"
-                                         size="1"
-                                         name={fieldName}
-                                         value={""}
-                                         onChange={this.handleChange}
-                                         autoComplete="off"
-                                />
-                                <br/><strike>{this.state[`${fieldName}_not`].join()}</strike>
-                                </>}
-                          </td>
+                  .map(colNumber =>
+                          <SudokuField
+                              rowNumber={rowNumber}
+                              colNumber={colNumber}
+                              cantBes={this.state[`field_${rowNumber}_${colNumber}_not`]}
+                              foundNumber={this.state[`field_${rowNumber}_${colNumber}`]}
+                              fieldName={`field_${rowNumber}_${colNumber}`}
+                              handleChange={this.handleChange}
+                          />
                   )}
                 </tr>)}
             </tbody>

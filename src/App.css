@@ -1,3 +1,16 @@
+.strong-border-right {
+  border-right-width: 2px !important;
+}
+.strong-border-top {
+  border-top-width: 2px !important;
+}
+.strong-border-left {
+  border-left-width: 2px !important;
+}
+.strong-border-bottom {
+  border-bottom-width: 2px !important;
+}
+
 .tg {
   border-collapse: collapse;
   border-spacing: 0;
