@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sudoku-solver/52967cd8125bf724e84d.worker.js"
   },
   {
-    "revision": "bc16e2bfccb132ff1fff4b48c71da855",
+    "revision": "49300954e77c28a5b17e2b90a7724366",
     "url": "/sudoku-solver/index.html"
   },
   {
