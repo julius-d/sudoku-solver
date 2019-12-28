@@ -17,10 +17,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: npm install and test
-      run: |
-        npm ci
-        npm test
+    - name: npm install
+      run: npm ci
+    - name: npm test
+      run: npm test
       env:
         CI: true
     - name: npm build
