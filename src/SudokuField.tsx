@@ -32,7 +32,7 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo((props
   const borderClassName = createBorderClassName(rowNumber, colNumber);
   return <td className={`tg-0lax ${borderClassName}`}>
     {foundNumber ?
-        <strong style={{fontSize  : 20}}>{foundNumber}</strong> :
+        <div style={{fontSize  : 24}}>{foundNumber}</div> :
 
         <><input type="text"
                  maxLength={1}
@@ -42,7 +42,7 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo((props
                  onChange={handleChange}
                  autoComplete="sudoku"
         />
-          <br/><s>{cantBes.join()}</s>
+          <br/><s>{cantBes.join(" ")}</s>
         </>}
   </td>;
 });
