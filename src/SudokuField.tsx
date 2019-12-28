@@ -34,7 +34,9 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo((props
     {foundNumber ?
         <div style={{fontSize  : 24}}>{foundNumber}</div> :
 
-        <><input type="text"
+        <><input
+                 type="text"
+                 pattern="[0-9]*"
                  maxLength={1}
                  size={1}
                  name={fieldName}
