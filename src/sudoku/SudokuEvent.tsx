@@ -2,13 +2,17 @@ import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 
 export default class SudokuEvent {
-
-  type : SudokuEventType;
+  type: SudokuEventType;
   position: SudokuPosition;
-  number : number;
+  number: number;
   from: string;
 
-  constructor(type : SudokuEventType, postion: SudokuPosition, number: number, from: string) {
+  constructor(
+    type: SudokuEventType,
+    postion: SudokuPosition,
+    number: number,
+    from: string
+  ) {
     this.type = type;
     this.position = postion;
     this.number = number;
@@ -34,6 +38,4 @@ export default class SudokuEvent {
   getFrom() {
     return this.from;
   }
-
-
 }

@@ -1,5 +1,1 @@
-
-
-export default class AbstractCantBe {
-
-}
+export default class AbstractCantBe {}

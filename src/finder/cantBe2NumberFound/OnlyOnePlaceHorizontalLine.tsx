@@ -3,10 +3,7 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
-
 export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
-
-
   /**
    * Es wird für jede Zeile(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
@@ -30,21 +27,35 @@ export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
     return speicher;
   }
 
-  finderLogic(cantBes: Array<SudokuEvent>) : Array<SudokuEvent> {
-    const result : Array<SudokuEvent> = [];
+  finderLogic(cantBes: Array<SudokuEvent>): Array<SudokuEvent> {
+    const result: Array<SudokuEvent> = [];
     cantBes.forEach(cantBe => {
-      // @ts-ignore
-      const canBeForNumberInLine = this.speicher.get(cantBe.getPosition().getXKoordinate()).get(cantBe.getNumber()) || []; // TOOD handle undefine
-      if (!canBeForNumberInLine.find(it => it.getXKoordinate() === cantBe.getPosition().getXKoordinate()
-          && it.getYKoordinate() === cantBe.getPosition().getYKoordinate())) {
+      const canBeForNumberInLine =
+        // @ts-ignore
+        this.speicher
+          .get(cantBe.getPosition().getXKoordinate())
+          .get(cantBe.getNumber()) || []; // TOOD handle undefine
+      if (
+        !canBeForNumberInLine.find(
+          it =>
+            it.getXKoordinate() === cantBe.getPosition().getXKoordinate() &&
+            it.getYKoordinate() === cantBe.getPosition().getYKoordinate()
+        )
+      ) {
         canBeForNumberInLine.push(cantBe.getPosition());
         if (canBeForNumberInLine.length === 8) {
-          result.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, OnlyOnePlaceHorizontalLine.onlyPossiblePosition(canBeForNumberInLine), cantBe.getNumber(), this.name  ))
+          result.push(
+            new SudokuEvent(
+              SudokuEventType.NUMBER_FOUND,
+              OnlyOnePlaceHorizontalLine.onlyPossiblePosition(
+                canBeForNumberInLine
+              ),
+              cantBe.getNumber(),
+              this.name
+            )
+          );
         }
       }
-
-
-
     });
     return result;
   }
@@ -53,7 +64,9 @@ export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
     this.speicher = OnlyOnePlaceHorizontalLine.initSpeicher();
   }
 
-  private static onlyPossiblePosition(canBeForNumberInLine: SudokuPosition[]) : SudokuPosition{
+  private static onlyPossiblePosition(
+    canBeForNumberInLine: SudokuPosition[]
+  ): SudokuPosition {
     for (let i = 0; i < 9; i++) {
       if (!canBeForNumberInLine.find(it => it.getYKoordinate() === i)) {
         return new SudokuPosition(canBeForNumberInLine[0].getXKoordinate(), i);

@@ -4,7 +4,6 @@ import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 
 describe("OnePositonCantBeRule", () => {
-
   let onePositonCantBeRule = new OnePositonCantBeRule();
 
   it("sends 8", () => {
@@ -13,5 +12,4 @@ describe("OnePositonCantBeRule", () => {
     );
     expect(results.length).toBe(8);
   });
-
 });

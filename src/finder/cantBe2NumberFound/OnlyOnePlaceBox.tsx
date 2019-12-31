@@ -5,17 +5,20 @@ import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
-  return one.getXKoordinate() === two.getXKoordinate()
-      && one.getYKoordinate() === two.getYKoordinate();
+  return (
+    one.getXKoordinate() === two.getXKoordinate() &&
+    one.getYKoordinate() === two.getYKoordinate()
+  );
 }
 
 export default class OnlyOnePlaceBox extends AbstractFinder {
-
-
   /**
    * Es wird für jede Box für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  speicher: Map<SudokuBox, Map<number, Array<SudokuPosition>>> = OnlyOnePlaceBox.init();
+  speicher: Map<
+    SudokuBox,
+    Map<number, Array<SudokuPosition>>
+  > = OnlyOnePlaceBox.init();
   name = "OnlyOnePlaceBox";
 
   private static init() {
@@ -34,8 +37,6 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
       }
     }
     return speicher;
-
-
   }
 
   finderLogic(cantBes: Array<SudokuEvent>) {
@@ -53,14 +54,19 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
           // @ts-ignore
           for (let newPos of box.allSudokuPositionInThisBox()) {
             if (!notHeres.find(it => samePosition(newPos, it))) {
-              results.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, newPos, nTNumber, this.name)); //FIXME
+              results.push(
+                new SudokuEvent(
+                  SudokuEventType.NUMBER_FOUND,
+                  newPos,
+                  nTNumber,
+                  this.name
+                )
+              ); //FIXME
             }
           }
         }
       }
-
     }
     return results;
   }
-
 }

@@ -1,5 +1,5 @@
 export default class SudokuPosition {
-  xKoordinate :number;
+  xKoordinate: number;
   yKoordinate: number;
 
   constructor(xKoordinate: number, yKoordinate: number) {
@@ -30,5 +30,4 @@ export default class SudokuPosition {
   valueOf() {
     return "[" + this.xKoordinate + "][" + this.yKoordinate + "]";
   }
-
 }

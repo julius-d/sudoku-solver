@@ -1,3 +1,1 @@
-export default class SudokuItem {
-
-}
+export default class SudokuItem {}

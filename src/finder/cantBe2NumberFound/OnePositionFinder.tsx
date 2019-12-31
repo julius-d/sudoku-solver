@@ -2,10 +2,7 @@ import AbstractFinder from "./AbstractFinder";
 import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
-
-
 export default class OnePositionFinder extends AbstractFinder {
-
   notThisNumber: boolean[][][] = OnePositionFinder.createBoolean3dArray();
   name = "OnePositionFinder";
 
@@ -14,18 +11,31 @@ export default class OnePositionFinder extends AbstractFinder {
     for (let info of cantBes) {
       const position = info.getPosition();
       const nTNumber = info.getNumber();
-      this.notThisNumber[position.getXKoordinate()][position.getYKoordinate()][nTNumber - 1] = true;
+      this.notThisNumber[position.getXKoordinate()][position.getYKoordinate()][
+        nTNumber - 1
+      ] = true;
 
       let anzFalse = 0;
       let lastFalsePostion = -1;
       for (let i = 0; i < 9; i++) {
-        if (!this.notThisNumber[position.getXKoordinate()][position.getYKoordinate()][i]) {
+        if (
+          !this.notThisNumber[position.getXKoordinate()][
+            position.getYKoordinate()
+          ][i]
+        ) {
           anzFalse++;
           lastFalsePostion = i;
         }
       }
       if (anzFalse === 1) {
-        results.push(new SudokuEvent(SudokuEventType.NUMBER_FOUND, position, lastFalsePostion + 1, this.name));
+        results.push(
+          new SudokuEvent(
+            SudokuEventType.NUMBER_FOUND,
+            position,
+            lastFalsePostion + 1,
+            this.name
+          )
+        );
       }
     }
     return results;
@@ -45,7 +55,5 @@ export default class OnePositionFinder extends AbstractFinder {
     }
 
     return array3d;
-
   }
-
 }
