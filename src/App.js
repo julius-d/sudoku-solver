@@ -43,7 +43,14 @@ class App extends Component {
         });
       } else if(type === SudokuEventType.NUMBER_FOUND){
         const name = `field_${x}_${y}`;
-        that.setState({[name]: value});
+          if (!that.state[name]) {
+          const nameFoundBy = `field_${x}_${y}_found_by`;
+          that.setState({
+            [name]: value,
+            [nameFoundBy]: e.data.from
+          });
+        }
+
       }
 
     }
@@ -53,6 +60,8 @@ class App extends Component {
     const target = event.target;
     const value = parseInt(target.value, 10);
     const name = target.name;
+    const nameFoundBy = name+"_found_by";
+
     if (!(value >= 1 && value <= 9)) {
       return
     }
@@ -61,7 +70,8 @@ class App extends Component {
     }
 
     this.setState({
-      [name]: value
+      [name]: value,
+      [nameFoundBy]: "USER"
     });
 
     this.worker.postMessage({
@@ -86,6 +96,7 @@ class App extends Component {
                               cantBes={this.state[`field_${rowNumber}_${colNumber}_not`]}
                               foundNumber={this.state[`field_${rowNumber}_${colNumber}`]}
                               fieldName={`field_${rowNumber}_${colNumber}`}
+                              numberFoundBy={this.state[`field_${rowNumber}_${colNumber}_found_by`]}
                               handleChange={this.handleChange}
                           />
                   )}

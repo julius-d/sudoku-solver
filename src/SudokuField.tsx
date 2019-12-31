@@ -6,6 +6,7 @@ interface SudokuFieldProps {
   foundNumber: number | undefined,
   cantBes: number[],
   fieldName :string,
+  numberFoundBy :string,
   handleChange : () => void
 }
 
@@ -27,12 +28,13 @@ function createBorderClassName(rowNumber: number, colNumber: number) {
 }
 
 const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo((props) => {
-  const {rowNumber, colNumber, foundNumber, cantBes, handleChange, fieldName} = props;
+  const {rowNumber, colNumber, foundNumber, cantBes, handleChange, fieldName, numberFoundBy} = props;
 
   const borderClassName = createBorderClassName(rowNumber, colNumber);
   return <td className={`tg-0lax ${borderClassName}`}>
     {foundNumber ?
-        <div style={{fontSize  : 24}}>{foundNumber}</div> :
+        <div style={{fontSize  : 24,
+          fontWeight : numberFoundBy === "USER" ? "bold" : "normal"}}>{foundNumber}</div> :
 
         <><input
                  type="text"
