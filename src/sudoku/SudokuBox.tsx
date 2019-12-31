@@ -1,14 +1,12 @@
-import SudokuItem from "./SudokuItem";
 import SudokuPosition from "./SudokuPosition";
 
-export default class SudokuBox extends SudokuItem {
+export default class SudokuBox {
   private readonly x: number;
   private readonly y: number;
 
   private static allInstances: SudokuBox[][] = SudokuBox.createAll();
 
   private constructor(x: number, y: number) {
-    super();
     if (x < 0 || y < 0 || x > 2 || y > 2) {
       throw new Error("illegal argument x:" + x + " y: " + y);
     }
