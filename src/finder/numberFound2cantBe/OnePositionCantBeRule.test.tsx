@@ -1,12 +1,12 @@
-import OnePositonCantBeRule from "./OnePositonCantBeRule";
+import OnePositionCantBeRule from "./OnePositionCantBeRule";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
-describe("OnePositonCantBeRule", () => {
-  let onePositonCantBeRule = new OnePositonCantBeRule();
+describe("OnePositionCantBeRule", () => {
+  let onePositionCantBeRule = new OnePositionCantBeRule();
 
   it("sends 8", () => {
-    let results = onePositonCantBeRule.finderLogic(
+    let results = onePositionCantBeRule.finderLogic(
       new NumberFoundEvent(new SudokuPosition(1, 2), 3, "")
     );
     expect(results.length).toBe(8);

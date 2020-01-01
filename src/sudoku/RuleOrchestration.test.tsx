@@ -2,6 +2,7 @@ import NumberFoundEvent from "./NumberFoundEvent";
 import RuleOrchestration from "./RuleOrchestration";
 import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
+import CantBeFoundEvent from "./CantBeFoundEvent";
 
 describe("RuleOrchestration", () => {
   let ruleOrchestration = new RuleOrchestration();
@@ -33,7 +34,7 @@ describe("RuleOrchestration", () => {
     ]);
   });
 
-  function handleEvent(numberFoundEvent: NumberFoundEvent) {
+  function handleEvent(numberFoundEvent: NumberFoundEvent | CantBeFoundEvent) {
     if (numberFoundEvent.type === SudokuEventType.NUMBER_FOUND) {
       let position = numberFoundEvent.getPosition();
       field[position.getXCoordinate()][

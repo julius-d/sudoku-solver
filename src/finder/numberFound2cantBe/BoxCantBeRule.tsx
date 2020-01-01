@@ -8,7 +8,7 @@ export default class BoxCantBeRule implements NumberFound2CantBe {
 
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];
-    const box = SudokuBox.createByPositon(numberFoundEvent.getPosition());
+    const box = SudokuBox.createByPosition(numberFoundEvent.getPosition());
 
     //  @ts-ignore
     for (let position of box.allSudokuPositionInThisBox()) {

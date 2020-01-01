@@ -1,7 +1,7 @@
 import BoxCantBeRule from "../finder/numberFound2cantBe/BoxCantBeRule";
 import HorizontalCantBeRule from "../finder/numberFound2cantBe/HorizontalCantBeRule";
 import VerticalCantBeRule from "../finder/numberFound2cantBe/VerticalCantBeRule";
-import OnePositonCantBeRule from "../finder/numberFound2cantBe/OnePositonCantBeRule";
+import OnePositionCantBeRule from "../finder/numberFound2cantBe/OnePositionCantBeRule";
 import OnlyOnePlaceHorizontalLine from "../finder/cantBe2NumberFound/OnlyOnePlaceHorizontalLine";
 import OnlyOnePlaceVerticalLine from "../finder/cantBe2NumberFound/OnlyOnePlaceVerticalLine";
 import OnlyOnePlaceBox from "../finder/cantBe2NumberFound/OnlyOnePlaceBox";
@@ -16,7 +16,7 @@ let numberFound2cantBeRules: NumberFound2CantBe[] = [
   new BoxCantBeRule(),
   new HorizontalCantBeRule(),
   new VerticalCantBeRule(),
-  new OnePositonCantBeRule()
+  new OnePositionCantBeRule()
 ];
 
 let cantBe2NumberFound: CantBe2NumberFound[] = [

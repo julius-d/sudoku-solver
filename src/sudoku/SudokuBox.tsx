@@ -37,7 +37,7 @@ export default class SudokuBox {
     return all;
   }
 
-  static createByPositon(postion: SudokuPosition) {
+  static createByPosition(postion: SudokuPosition) {
     let x = postion.getXCoordinate();
     let y = postion.getYCoordinate();
     x = Math.trunc(x / 3);
