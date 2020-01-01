@@ -1,12 +1,13 @@
-import AbstractCantBe from "./AbstractCantBe";
 import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuEventType from "../../sudoku/SudokuEventType";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import NumberFound2CantBe from "./NumberFound2CantBe";
 
-export default class VerticalCantBeRule extends AbstractCantBe {
+export default class VerticalCantBeRule implements NumberFound2CantBe {
   name = "VerticalCantBeRule";
 
-  finderLogic(numberFoundEvent: SudokuEvent) {
+  finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];
 
     let yk = numberFoundEvent.getPosition().getYKoordinate();

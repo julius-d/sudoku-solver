@@ -8,8 +8,9 @@ import OnlyOnePlaceBox from "../finder/cantBe2NumberFound/OnlyOnePlaceBox";
 import OnePositionFinder from "../finder/cantBe2NumberFound/OnePositionFinder";
 import EventFilter from "./EventFilter";
 import SudokuEvent from "./SudokuEvent";
+import NumberFound2CantBe from "../finder/numberFound2cantBe/NumberFound2CantBe";
 
-let numberFound2cantBeRules = [
+let numberFound2cantBeRules: NumberFound2CantBe[] = [
   new BoxCantBeRule(),
   new HorizontalCantBeRule(),
   new VerticalCantBeRule(),

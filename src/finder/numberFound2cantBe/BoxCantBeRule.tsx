@@ -1,12 +1,13 @@
-import AbstractCantBe from "./AbstractCantBe";
 import SudokuBox from "../../sudoku/SudokuBox";
 import SudokuEvent from "../../sudoku/SudokuEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import NumberFound2CantBe from "./NumberFound2CantBe";
 
-export default class BoxCantBeRule extends AbstractCantBe {
+export default class BoxCantBeRule implements NumberFound2CantBe {
   private ruleName = "BoxCantBeRule";
 
-  finderLogic(numberFoundEvent: SudokuEvent) {
+  finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];
     const box = SudokuBox.createByPositon(numberFoundEvent.getPosition());
 
