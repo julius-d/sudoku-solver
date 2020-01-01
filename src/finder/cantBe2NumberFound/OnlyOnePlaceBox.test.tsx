@@ -5,7 +5,7 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
-    function cantBeNumber1AtPostion(xKoordinate: number, koordinate2: number) {
+    function cantBeNumber1AtPosition(xKoordinate: number, koordinate2: number) {
       return new CantBeFoundEvent(
         new SudokuPosition(xKoordinate, koordinate2),
         1,
@@ -15,14 +15,14 @@ describe("OnlyOnePlaceBox", () => {
 
     const onlyOnePlaceBox = new OnlyOnePlaceBox();
     let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceBox.finderLogic([
-      cantBeNumber1AtPostion(0, 0),
-      cantBeNumber1AtPostion(0, 1),
-      cantBeNumber1AtPostion(1, 0),
-      cantBeNumber1AtPostion(1, 1),
-      cantBeNumber1AtPostion(1, 2),
-      cantBeNumber1AtPostion(2, 1),
-      cantBeNumber1AtPostion(2, 2),
-      cantBeNumber1AtPostion(0, 2)
+      cantBeNumber1AtPosition(0, 0),
+      cantBeNumber1AtPosition(0, 1),
+      cantBeNumber1AtPosition(1, 0),
+      cantBeNumber1AtPosition(1, 1),
+      cantBeNumber1AtPosition(1, 2),
+      cantBeNumber1AtPosition(2, 1),
+      cantBeNumber1AtPosition(2, 2),
+      cantBeNumber1AtPosition(0, 2)
     ]);
 
     expect(numberFoundEvents.length).toBe(1);

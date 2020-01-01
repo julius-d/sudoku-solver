@@ -4,7 +4,7 @@ import OnlyOnePlaceVerticalLine from "./OnlyOnePlaceVerticalLine";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceVerticalLine", () => {
-  function cantBeNumber1AtPostion(xKoordinate: number, yKoordinate: number) {
+  function cantBeNumber1AtPosition(xKoordinate: number, yKoordinate: number) {
     return new CantBeFoundEvent(
       new SudokuPosition(xKoordinate, yKoordinate),
       1,
@@ -16,14 +16,14 @@ describe("OnlyOnePlaceVerticalLine", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceVerticalLine();
     let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceHorizontalLine.finderLogic(
       [
-        cantBeNumber1AtPostion(0, 1),
-        cantBeNumber1AtPostion(1, 1),
-        cantBeNumber1AtPostion(2, 1),
-        cantBeNumber1AtPostion(3, 1),
-        cantBeNumber1AtPostion(4, 1),
-        cantBeNumber1AtPostion(5, 1),
-        cantBeNumber1AtPostion(6, 1),
-        cantBeNumber1AtPostion(7, 1)
+        cantBeNumber1AtPosition(0, 1),
+        cantBeNumber1AtPosition(1, 1),
+        cantBeNumber1AtPosition(2, 1),
+        cantBeNumber1AtPosition(3, 1),
+        cantBeNumber1AtPosition(4, 1),
+        cantBeNumber1AtPosition(5, 1),
+        cantBeNumber1AtPosition(6, 1),
+        cantBeNumber1AtPosition(7, 1)
       ]
     );
 

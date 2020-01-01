@@ -4,7 +4,7 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("onlyOnePlaceHorizontalLine", () => {
-  function cantBeNumber1AtPostion(xKoordinate: number, koordinate2: number) {
+  function cantBeNumber1AtPosition(xKoordinate: number, koordinate2: number) {
     return new CantBeFoundEvent(
       new SudokuPosition(xKoordinate, koordinate2),
       1,
@@ -16,14 +16,14 @@ describe("onlyOnePlaceHorizontalLine", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceHorizontalLine();
     let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceHorizontalLine.finderLogic(
       [
-        cantBeNumber1AtPostion(1, 0),
-        cantBeNumber1AtPostion(1, 1),
-        cantBeNumber1AtPostion(1, 2),
-        cantBeNumber1AtPostion(1, 3),
-        cantBeNumber1AtPostion(1, 4),
-        cantBeNumber1AtPostion(1, 5),
-        cantBeNumber1AtPostion(1, 6),
-        cantBeNumber1AtPostion(1, 7)
+        cantBeNumber1AtPosition(1, 0),
+        cantBeNumber1AtPosition(1, 1),
+        cantBeNumber1AtPosition(1, 2),
+        cantBeNumber1AtPosition(1, 3),
+        cantBeNumber1AtPosition(1, 4),
+        cantBeNumber1AtPosition(1, 5),
+        cantBeNumber1AtPosition(1, 6),
+        cantBeNumber1AtPosition(1, 7)
       ]
     );
 
@@ -37,13 +37,13 @@ describe("onlyOnePlaceHorizontalLine", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceHorizontalLine();
     let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceHorizontalLine.finderLogic(
       [
-        cantBeNumber1AtPostion(1, 1),
-        cantBeNumber1AtPostion(1, 2),
-        cantBeNumber1AtPostion(1, 3),
-        cantBeNumber1AtPostion(1, 4),
-        cantBeNumber1AtPostion(1, 5),
-        cantBeNumber1AtPostion(1, 6),
-        cantBeNumber1AtPostion(1, 7)
+        cantBeNumber1AtPosition(1, 1),
+        cantBeNumber1AtPosition(1, 2),
+        cantBeNumber1AtPosition(1, 3),
+        cantBeNumber1AtPosition(1, 4),
+        cantBeNumber1AtPosition(1, 5),
+        cantBeNumber1AtPosition(1, 6),
+        cantBeNumber1AtPosition(1, 7)
       ]
     );
 

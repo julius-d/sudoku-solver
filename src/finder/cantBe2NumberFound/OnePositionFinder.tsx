@@ -16,7 +16,7 @@ export default class OnePositionFinder implements CantBe2NumberFound {
       ] = true;
 
       let anzFalse = 0;
-      let lastFalsePostion = -1;
+      let lastFalsePosition = -1;
       for (let i = 0; i < 9; i++) {
         if (
           !this.notThisNumber[position.getXKoordinate()][
@@ -24,12 +24,12 @@ export default class OnePositionFinder implements CantBe2NumberFound {
           ][i]
         ) {
           anzFalse++;
-          lastFalsePostion = i;
+          lastFalsePosition = i;
         }
       }
       if (anzFalse === 1) {
         results.push(
-          new NumberFoundEvent(position, lastFalsePostion + 1, this.name)
+          new NumberFoundEvent(position, lastFalsePosition + 1, this.name)
         );
       }
     }
