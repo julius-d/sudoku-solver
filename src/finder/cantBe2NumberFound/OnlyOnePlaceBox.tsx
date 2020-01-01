@@ -6,8 +6,8 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
   return (
-    one.getXKoordinate() === two.getXKoordinate() &&
-    one.getYKoordinate() === two.getYKoordinate()
+    one.getXCoordinate() === two.getXCoordinate() &&
+    one.getYCoordinate() === two.getYCoordinate()
   );
 }
 

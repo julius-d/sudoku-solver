@@ -5,9 +5,9 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
-    function cantBeNumber1AtPosition(xKoordinate: number, koordinate2: number) {
+    function cantBeNumber1AtPosition(xCoordinate: number, coordinate2: number) {
       return new CantBeFoundEvent(
-        new SudokuPosition(xKoordinate, koordinate2),
+        new SudokuPosition(xCoordinate, coordinate2),
         1,
         ""
       );
@@ -27,7 +27,7 @@ describe("OnlyOnePlaceBox", () => {
 
     expect(numberFoundEvents.length).toBe(1);
     expect(numberFoundEvents[0].getNumber()).toBe(1);
-    expect(numberFoundEvents[0].getPosition().getXKoordinate()).toBe(2);
-    expect(numberFoundEvents[0].getPosition().getYKoordinate()).toBe(0);
+    expect(numberFoundEvents[0].getPosition().getXCoordinate()).toBe(2);
+    expect(numberFoundEvents[0].getPosition().getYCoordinate()).toBe(0);
   });
 });

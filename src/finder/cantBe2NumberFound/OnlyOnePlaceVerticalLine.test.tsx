@@ -4,9 +4,9 @@ import OnlyOnePlaceVerticalLine from "./OnlyOnePlaceVerticalLine";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceVerticalLine", () => {
-  function cantBeNumber1AtPosition(xKoordinate: number, yKoordinate: number) {
+  function cantBeNumber1AtPosition(xCoordinate: number, yCoordinate: number) {
     return new CantBeFoundEvent(
-      new SudokuPosition(xKoordinate, yKoordinate),
+      new SudokuPosition(xCoordinate, yCoordinate),
       1,
       ""
     );
@@ -29,7 +29,7 @@ describe("OnlyOnePlaceVerticalLine", () => {
 
     expect(numberFoundEvents.length).toBe(1);
     expect(numberFoundEvents[0].getNumber()).toBe(1);
-    expect(numberFoundEvents[0].getPosition().getXKoordinate()).toBe(8);
-    expect(numberFoundEvents[0].getPosition().getYKoordinate()).toBe(1);
+    expect(numberFoundEvents[0].getPosition().getXCoordinate()).toBe(8);
+    expect(numberFoundEvents[0].getPosition().getYCoordinate()).toBe(1);
   });
 });

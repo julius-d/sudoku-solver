@@ -13,10 +13,10 @@ export default class BoxCantBeRule implements NumberFound2CantBe {
     //  @ts-ignore
     for (let position of box.allSudokuPositionInThisBox()) {
       if (
-        position.getYKoordinate() !==
-          numberFoundEvent.getPosition().getYKoordinate() ||
-        position.getXKoordinate() !==
-          numberFoundEvent.getPosition().getXKoordinate()
+        position.getYCoordinate() !==
+          numberFoundEvent.getPosition().getYCoordinate() ||
+        position.getXCoordinate() !==
+          numberFoundEvent.getPosition().getXCoordinate()
       ) {
         result.push(
           new CantBeFoundEvent(

@@ -8,7 +8,7 @@ describe("SudokuBox", () => {
 
     expect(allPositionInBox.length).toBe(9);
     expect(
-      allPositionInBox.map(pos => [pos.getXKoordinate(), pos.getYKoordinate()])
+      allPositionInBox.map(pos => [pos.getXCoordinate(), pos.getYCoordinate()])
     ).toEqual([
       [0, 0],
       [1, 0],

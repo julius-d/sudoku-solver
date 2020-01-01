@@ -11,7 +11,7 @@ export default class OnePositionFinder implements CantBe2NumberFound {
     for (let info of cantBes) {
       const position = info.getPosition();
       const nTNumber = info.getNumber();
-      this.notThisNumber[position.getXKoordinate()][position.getYKoordinate()][
+      this.notThisNumber[position.getXCoordinate()][position.getYCoordinate()][
         nTNumber - 1
       ] = true;
 
@@ -19,8 +19,8 @@ export default class OnePositionFinder implements CantBe2NumberFound {
       let lastFalsePosition = -1;
       for (let i = 0; i < 9; i++) {
         if (
-          !this.notThisNumber[position.getXKoordinate()][
-            position.getYKoordinate()
+          !this.notThisNumber[position.getXCoordinate()][
+            position.getYCoordinate()
           ][i]
         ) {
           anzFalse++;

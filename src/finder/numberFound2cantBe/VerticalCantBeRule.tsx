@@ -9,9 +9,9 @@ export default class VerticalCantBeRule implements NumberFound2CantBe {
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];
 
-    let yk = numberFoundEvent.getPosition().getYKoordinate();
+    let yk = numberFoundEvent.getPosition().getYCoordinate();
     for (let xk = 0; xk < 9; xk++) {
-      if (xk !== numberFoundEvent.getPosition().getXKoordinate()) {
+      if (xk !== numberFoundEvent.getPosition().getXCoordinate()) {
         result.push(
           new CantBeFoundEvent(
             new SudokuPosition(xk, yk),

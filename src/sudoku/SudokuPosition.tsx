@@ -1,25 +1,25 @@
 export default class SudokuPosition {
-  readonly xKoordinate: number;
-  readonly yKoordinate: number;
+  readonly xCoordinate: number;
+  readonly yCoordinate: number;
 
-  constructor(xKoordinate: number, yKoordinate: number) {
-    this.xKoordinate = xKoordinate;
-    this.yKoordinate = yKoordinate;
+  constructor(xCoordinate: number, yCoordinate: number) {
+    this.xCoordinate = xCoordinate;
+    this.yCoordinate = yCoordinate;
   }
 
-  getXKoordinate() {
-    return this.xKoordinate;
+  getXCoordinate() {
+    return this.xCoordinate;
   }
 
-  getYKoordinate() {
-    return this.yKoordinate;
+  getYCoordinate() {
+    return this.yCoordinate;
   }
 
   toString() {
-    return "Pos: [" + this.xKoordinate + "," + this.yKoordinate + "]";
+    return "Pos: [" + this.xCoordinate + "," + this.yCoordinate + "]";
   }
 
   valueOf() {
-    return "[" + this.xKoordinate + "][" + this.yKoordinate + "]";
+    return "[" + this.xCoordinate + "][" + this.yCoordinate + "]";
   }
 }

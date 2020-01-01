@@ -21,7 +21,7 @@ describe("OnePositionFinder", () => {
 
     expect(numberFoundEvents.length).toBe(1);
     expect(numberFoundEvents[0].getNumber()).toBe(9);
-    expect(numberFoundEvents[0].getPosition().getXKoordinate()).toBe(2);
-    expect(numberFoundEvents[0].getPosition().getYKoordinate()).toBe(3);
+    expect(numberFoundEvents[0].getPosition().getXCoordinate()).toBe(2);
+    expect(numberFoundEvents[0].getPosition().getYCoordinate()).toBe(3);
   });
 });

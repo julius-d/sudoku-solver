@@ -9,9 +9,9 @@ export default class HorizontalCantBeRule implements NumberFound2CantBe {
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];
 
-    let xk = numberFoundEvent.getPosition().getXKoordinate();
+    let xk = numberFoundEvent.getPosition().getXCoordinate();
     for (let yk = 0; yk < 9; yk++) {
-      if (yk !== numberFoundEvent.getPosition().getYKoordinate()) {
+      if (yk !== numberFoundEvent.getPosition().getYCoordinate()) {
         result.push(
           new CantBeFoundEvent(
             new SudokuPosition(xk, yk),

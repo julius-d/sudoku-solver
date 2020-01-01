@@ -24,8 +24,8 @@ class App extends Component {
     this.worker = new Worker();
     this.worker.onmessage = function(e) {
       console.log("Message received from worker", e);
-      const x = e.data.position.xKoordinate;
-      const y = e.data.position.yKoordinate;
+      const x = e.data.position.xCoordinate;
+      const y = e.data.position.yCoordinate;
       const value = e.data.number;
       const type = e.data.type;
 

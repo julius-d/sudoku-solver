@@ -36,8 +36,8 @@ describe("RuleOrchestration", () => {
   function handleEvent(numberFoundEvent: NumberFoundEvent) {
     if (numberFoundEvent.type === SudokuEventType.NUMBER_FOUND) {
       let position = numberFoundEvent.getPosition();
-      field[position.getXKoordinate()][
-        position.getYKoordinate()
+      field[position.getXCoordinate()][
+        position.getYCoordinate()
       ] = numberFoundEvent.getNumber().toString(10);
     }
   }

@@ -32,13 +32,13 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
       const canBeForNumberInLine =
         // @ts-ignore
         this.speicher
-          .get(cantBe.getPosition().getXKoordinate())
+          .get(cantBe.getPosition().getXCoordinate())
           .get(cantBe.getNumber()) || []; // TOOD handle undefine
       if (
         !canBeForNumberInLine.find(
           it =>
-            it.getXKoordinate() === cantBe.getPosition().getXKoordinate() &&
-            it.getYKoordinate() === cantBe.getPosition().getYKoordinate()
+            it.getXCoordinate() === cantBe.getPosition().getXCoordinate() &&
+            it.getYCoordinate() === cantBe.getPosition().getYCoordinate()
         )
       ) {
         canBeForNumberInLine.push(cantBe.getPosition());
@@ -66,8 +66,8 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
     canBeForNumberInLine: SudokuPosition[]
   ): SudokuPosition {
     for (let i = 0; i < 9; i++) {
-      if (!canBeForNumberInLine.find(it => it.getYKoordinate() === i)) {
-        return new SudokuPosition(canBeForNumberInLine[0].getXKoordinate(), i);
+      if (!canBeForNumberInLine.find(it => it.getYCoordinate() === i)) {
+        return new SudokuPosition(canBeForNumberInLine[0].getXCoordinate(), i);
       }
     }
     throw new Error("shoudl not happen");
