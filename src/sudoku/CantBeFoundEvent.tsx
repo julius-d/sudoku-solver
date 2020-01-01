@@ -2,10 +2,10 @@ import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 
 export default class CantBeFoundEvent {
-  type: SudokuEventType;
-  position: SudokuPosition;
-  number: number;
-  from: string;
+  readonly type: SudokuEventType;
+  readonly position: SudokuPosition;
+  readonly number: number;
+  readonly from: string;
 
   constructor(
     type: SudokuEventType,
@@ -23,16 +23,8 @@ export default class CantBeFoundEvent {
     return this.number;
   }
 
-  setNumber(number: number) {
-    this.number = number;
-  }
-
   getPosition() {
     return this.position;
-  }
-
-  setPosition(postion: SudokuPosition) {
-    this.position = postion;
   }
 
   getFrom() {
