@@ -2,10 +2,10 @@ import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 
 export default class NumberFoundEvent {
-  type = SudokuEventType.NUMBER_FOUND;
-  position: SudokuPosition;
-  number: number;
-  from: string;
+  readonly type = SudokuEventType.NUMBER_FOUND;
+  readonly position: SudokuPosition;
+  readonly number: number;
+  readonly from: string;
 
   constructor(position: SudokuPosition, number: number, from: string) {
     this.position = position;

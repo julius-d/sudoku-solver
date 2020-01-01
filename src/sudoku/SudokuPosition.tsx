@@ -1,6 +1,6 @@
 export default class SudokuPosition {
-  xKoordinate: number;
-  yKoordinate: number;
+  readonly xKoordinate: number;
+  readonly yKoordinate: number;
 
   constructor(xKoordinate: number, yKoordinate: number) {
     this.xKoordinate = xKoordinate;
@@ -11,16 +11,8 @@ export default class SudokuPosition {
     return this.xKoordinate;
   }
 
-  setXKoordinate(koordinate: number) {
-    this.xKoordinate = koordinate;
-  }
-
   getYKoordinate() {
     return this.yKoordinate;
-  }
-
-  setYKoordinate(koordinate: number) {
-    this.yKoordinate = koordinate;
   }
 
   toString() {
