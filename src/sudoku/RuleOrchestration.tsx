@@ -9,6 +9,7 @@ import OnePositionFinder from "../finder/cantBe2NumberFound/OnePositionFinder";
 import EventFilter from "./EventFilter";
 import SudokuEvent from "./SudokuEvent";
 import NumberFound2CantBe from "../finder/numberFound2cantBe/NumberFound2CantBe";
+import NumberFoundEvent from "./NumberFoundEvent";
 
 let numberFound2cantBeRules: NumberFound2CantBe[] = [
   new BoxCantBeRule(),
@@ -28,8 +29,8 @@ let eventFilter = new EventFilter();
 
 export default class RuleOrchestration {
   handleGivenNumber(
-    sudokuEvent: SudokuEvent,
-    postMessage: (e: SudokuEvent) => void
+    sudokuEvent: NumberFoundEvent,
+    postMessage: (e: SudokuEvent | NumberFoundEvent) => void
   ) {
     let foundNumbers = [sudokuEvent];
     do {

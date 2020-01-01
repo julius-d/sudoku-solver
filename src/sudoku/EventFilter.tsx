@@ -1,10 +1,10 @@
-import SudokuEvent from "./SudokuEvent";
 import SudokuEventType from "./SudokuEventType";
+import NumberFoundEvent from "./NumberFoundEvent";
 
 export default class EventFilter {
   private numberFound: number[][] = [[], [], [], [], [], [], [], [], []];
 
-  removeAlreadySeen(toFilter: SudokuEvent[]) {
+  removeAlreadySeen(toFilter: NumberFoundEvent[]) {
     const filtered = [];
 
     for (const sudokuEvent of toFilter) {
