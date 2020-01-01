@@ -1,12 +1,12 @@
 import AbstractFinder from "./AbstractFinder";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
 export default class OnePositionFinder extends AbstractFinder {
   notThisNumber: boolean[][][] = OnePositionFinder.createBoolean3dArray();
   name = "OnePositionFinder";
 
-  finderLogic(cantBes: Array<SudokuEvent>) {
+  finderLogic(cantBes: Array<CantBeFoundEvent>) {
     const results = [];
     for (let info of cantBes) {
       const position = info.getPosition();
@@ -29,7 +29,7 @@ export default class OnePositionFinder extends AbstractFinder {
       }
       if (anzFalse === 1) {
         results.push(
-          new SudokuEvent(
+          new CantBeFoundEvent(
             SudokuEventType.NUMBER_FOUND,
             position,
             lastFalsePostion + 1,

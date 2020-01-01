@@ -1,4 +1,4 @@
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
@@ -14,7 +14,7 @@ export default class VerticalCantBeRule implements NumberFound2CantBe {
     for (let xk = 0; xk < 9; xk++) {
       if (xk !== numberFoundEvent.getPosition().getXKoordinate()) {
         result.push(
-          new SudokuEvent(
+          new CantBeFoundEvent(
             SudokuEventType.CANT_BE,
             new SudokuPosition(xk, yk),
             numberFoundEvent.getNumber(),

@@ -1,7 +1,7 @@
 import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 
-export default class SudokuEvent {
+export default class CantBeFoundEvent {
   type: SudokuEventType;
   position: SudokuPosition;
   number: number;

@@ -1,12 +1,12 @@
 import OnlyOnePlaceBox from "./OnlyOnePlaceBox";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
     function cantBeNumber1AtPostion(xKoordinate: number, koordinate2: number) {
-      return new SudokuEvent(
+      return new CantBeFoundEvent(
         SudokuEventType.CANT_BE,
         new SudokuPosition(xKoordinate, koordinate2),
         1,
@@ -15,7 +15,7 @@ describe("OnlyOnePlaceBox", () => {
     }
 
     const onlyOnePlaceBox = new OnlyOnePlaceBox();
-    let sudokuEvents: Array<SudokuEvent> = onlyOnePlaceBox.finderLogic([
+    let sudokuEvents: Array<CantBeFoundEvent> = onlyOnePlaceBox.finderLogic([
       cantBeNumber1AtPostion(0, 0),
       cantBeNumber1AtPostion(0, 1),
       cantBeNumber1AtPostion(1, 0),

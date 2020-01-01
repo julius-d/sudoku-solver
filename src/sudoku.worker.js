@@ -1,7 +1,6 @@
-import SudokuEvent from "./sudoku/SudokuEvent";
 import SudokuPosition from "./sudoku/SudokuPosition";
-import SudokuEventType from "./sudoku/SudokuEventType";
 import RuleOrchestration from "./sudoku/RuleOrchestration";
+import NumberFoundEvent from "./sudoku/NumberFoundEvent";
 
 let ruleOrchestration = new RuleOrchestration();
 
@@ -9,8 +8,7 @@ let ruleOrchestration = new RuleOrchestration();
 addEventListener("message", ({ data }) => {
   console.log("worker got message", data);
 
-  let sudokuEvent = new SudokuEvent(
-    SudokuEventType.NUMBER_FOUND,
+  let sudokuEvent = new NumberFoundEvent(
     new SudokuPosition(data.field[0], data.field[1]),
     data.value,
     "USER"

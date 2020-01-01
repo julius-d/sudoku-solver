@@ -1,6 +1,6 @@
 import AbstractFinder from "./AbstractFinder";
 import SudokuPosition from "../../sudoku/SudokuPosition";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
 export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
@@ -27,8 +27,8 @@ export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
     return speicher;
   }
 
-  finderLogic(cantBes: Array<SudokuEvent>): Array<SudokuEvent> {
-    const result: Array<SudokuEvent> = [];
+  finderLogic(cantBes: Array<CantBeFoundEvent>): Array<CantBeFoundEvent> {
+    const result: Array<CantBeFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
         // @ts-ignore
@@ -45,8 +45,8 @@ export default class OnlyOnePlaceHorizontalLine extends AbstractFinder {
         canBeForNumberInLine.push(cantBe.getPosition());
         if (canBeForNumberInLine.length === 8) {
           result.push(
-            new SudokuEvent(
-              SudokuEventType.NUMBER_FOUND,
+            new CantBeFoundEvent(
+              SudokuEventType.CANT_BE,
               OnlyOnePlaceHorizontalLine.onlyPossiblePosition(
                 canBeForNumberInLine
               ),

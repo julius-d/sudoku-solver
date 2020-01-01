@@ -1,11 +1,11 @@
 import OnlyOnePlaceHorizontalLine from "./OnlyOnePlaceHorizontalLine";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 
 describe("onlyOnePlaceHorizontalLine", () => {
   function cantBeNumber1AtPostion(xKoordinate: number, koordinate2: number) {
-    return new SudokuEvent(
+    return new CantBeFoundEvent(
       SudokuEventType.CANT_BE,
       new SudokuPosition(xKoordinate, koordinate2),
       1,
@@ -15,7 +15,7 @@ describe("onlyOnePlaceHorizontalLine", () => {
 
   it("finds the number", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceHorizontalLine();
-    let sudokuEvents: Array<SudokuEvent> = onlyOnePlaceHorizontalLine.finderLogic(
+    let sudokuEvents: Array<CantBeFoundEvent> = onlyOnePlaceHorizontalLine.finderLogic(
       [
         cantBeNumber1AtPostion(1, 0),
         cantBeNumber1AtPostion(1, 1),
@@ -36,7 +36,7 @@ describe("onlyOnePlaceHorizontalLine", () => {
 
   it("finds no number", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceHorizontalLine();
-    let sudokuEvents: Array<SudokuEvent> = onlyOnePlaceHorizontalLine.finderLogic(
+    let sudokuEvents: Array<CantBeFoundEvent> = onlyOnePlaceHorizontalLine.finderLogic(
       [
         cantBeNumber1AtPostion(1, 1),
         cantBeNumber1AtPostion(1, 2),

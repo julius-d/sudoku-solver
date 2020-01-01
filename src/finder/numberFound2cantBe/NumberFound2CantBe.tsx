@@ -1,6 +1,6 @@
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 
 export default interface NumberFound2CantBe {
-  finderLogic(numberFoundEvent: NumberFoundEvent): SudokuEvent[];
+  finderLogic(numberFoundEvent: NumberFoundEvent): CantBeFoundEvent[];
 }

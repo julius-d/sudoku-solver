@@ -1,7 +1,7 @@
 import AbstractFinder from "./AbstractFinder";
 import SudokuBox from "../../sudoku/SudokuBox";
 import SudokuPosition from "../../sudoku/SudokuPosition";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
@@ -39,7 +39,7 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
     return speicher;
   }
 
-  finderLogic(cantBes: Array<SudokuEvent>) {
+  finderLogic(cantBes: Array<CantBeFoundEvent>) {
     const results = [];
     for (let info of cantBes) {
       let position = info.getPosition();
@@ -55,8 +55,8 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
           for (let newPos of box.allSudokuPositionInThisBox()) {
             if (!notHeres.find(it => samePosition(newPos, it))) {
               results.push(
-                new SudokuEvent(
-                  SudokuEventType.NUMBER_FOUND,
+                new CantBeFoundEvent(
+                  SudokuEventType.CANT_BE,
                   newPos,
                   nTNumber,
                   this.name

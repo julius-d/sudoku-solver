@@ -1,5 +1,5 @@
 import SudokuBox from "../../sudoku/SudokuBox";
-import SudokuEvent from "../../sudoku/SudokuEvent";
+import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import NumberFound2CantBe from "./NumberFound2CantBe";
@@ -20,7 +20,7 @@ export default class BoxCantBeRule implements NumberFound2CantBe {
           numberFoundEvent.getPosition().getXKoordinate()
       ) {
         result.push(
-          new SudokuEvent(
+          new CantBeFoundEvent(
             SudokuEventType.CANT_BE,
             position,
             numberFoundEvent.getNumber(),
