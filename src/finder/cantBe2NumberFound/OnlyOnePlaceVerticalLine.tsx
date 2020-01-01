@@ -1,9 +1,10 @@
-import AbstractFinder from "./AbstractFinder";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
+import CantBe2NumberFound from "./CantBe2NumberFound";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
-export default class OnlyOnePlaceVerticalLine extends AbstractFinder {
+export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
   /**
    * Es wird für jede Reihe(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
@@ -11,7 +12,6 @@ export default class OnlyOnePlaceVerticalLine extends AbstractFinder {
   name = "OnlyOnePlaceVerticalLine";
 
   constructor() {
-    super();
     this.speicher = OnlyOnePlaceVerticalLine.initSpeicher();
   }
 
@@ -28,7 +28,7 @@ export default class OnlyOnePlaceVerticalLine extends AbstractFinder {
   }
 
   finderLogic(cantBes: Array<CantBeFoundEvent>): Array<CantBeFoundEvent> {
-    const result: Array<CantBeFoundEvent> = [];
+    const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
         // @ts-ignore

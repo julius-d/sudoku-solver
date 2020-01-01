@@ -1,8 +1,8 @@
-import AbstractFinder from "./AbstractFinder";
 import SudokuBox from "../../sudoku/SudokuBox";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
-import SudokuEventType from "../../sudoku/SudokuEventType";
+import CantBe2NumberFound from "./CantBe2NumberFound";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
   return (
@@ -11,7 +11,7 @@ function samePosition(one: SudokuPosition, two: SudokuPosition) {
   );
 }
 
-export default class OnlyOnePlaceBox extends AbstractFinder {
+export default class OnlyOnePlaceBox implements CantBe2NumberFound {
   /**
    * Es wird für jede Box für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
@@ -54,14 +54,7 @@ export default class OnlyOnePlaceBox extends AbstractFinder {
           // @ts-ignore
           for (let newPos of box.allSudokuPositionInThisBox()) {
             if (!notHeres.find(it => samePosition(newPos, it))) {
-              results.push(
-                new CantBeFoundEvent(
-                  SudokuEventType.CANT_BE,
-                  newPos,
-                  nTNumber,
-                  this.name
-                )
-              ); //FIXME
+              results.push(new NumberFoundEvent(newPos, nTNumber, this.name)); //FIXME
             }
           }
         }
