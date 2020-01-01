@@ -1,6 +1,5 @@
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
-import SudokuEventType from "../../sudoku/SudokuEventType";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
@@ -27,7 +26,7 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
     return speicher;
   }
 
-  finderLogic(cantBes: Array<CantBeFoundEvent>): Array<CantBeFoundEvent> {
+  finderLogic(cantBes: Array<CantBeFoundEvent>): Array<NumberFoundEvent> {
     const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
@@ -45,8 +44,7 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
         canBeForNumberInLine.push(cantBe.getPosition());
         if (canBeForNumberInLine.length === 8) {
           result.push(
-            new CantBeFoundEvent(
-              SudokuEventType.CANT_BE,
+            new NumberFoundEvent(
               OnlyOnePlaceVerticalLine.onlyPossiblePosition(
                 canBeForNumberInLine
               ),

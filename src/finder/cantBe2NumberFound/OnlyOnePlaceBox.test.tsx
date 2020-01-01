@@ -2,6 +2,7 @@ import OnlyOnePlaceBox from "./OnlyOnePlaceBox";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
@@ -15,7 +16,7 @@ describe("OnlyOnePlaceBox", () => {
     }
 
     const onlyOnePlaceBox = new OnlyOnePlaceBox();
-    let sudokuEvents: Array<CantBeFoundEvent> = onlyOnePlaceBox.finderLogic([
+    let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceBox.finderLogic([
       cantBeNumber1AtPostion(0, 0),
       cantBeNumber1AtPostion(0, 1),
       cantBeNumber1AtPostion(1, 0),
@@ -26,9 +27,9 @@ describe("OnlyOnePlaceBox", () => {
       cantBeNumber1AtPostion(0, 2)
     ]);
 
-    expect(sudokuEvents.length).toBe(1);
-    expect(sudokuEvents[0].getNumber()).toBe(1);
-    expect(sudokuEvents[0].getPosition().getXKoordinate()).toBe(2);
-    expect(sudokuEvents[0].getPosition().getYKoordinate()).toBe(0);
+    expect(numberFoundEvents.length).toBe(1);
+    expect(numberFoundEvents[0].getNumber()).toBe(1);
+    expect(numberFoundEvents[0].getPosition().getXKoordinate()).toBe(2);
+    expect(numberFoundEvents[0].getPosition().getYKoordinate()).toBe(0);
   });
 });

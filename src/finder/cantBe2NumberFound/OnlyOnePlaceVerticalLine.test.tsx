@@ -2,6 +2,7 @@ import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import OnlyOnePlaceVerticalLine from "./OnlyOnePlaceVerticalLine";
+import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceVerticalLine", () => {
   function cantBeNumber1AtPostion(xKoordinate: number, yKoordinate: number) {
@@ -15,7 +16,7 @@ describe("OnlyOnePlaceVerticalLine", () => {
 
   it("finds the number", () => {
     let onlyOnePlaceHorizontalLine = new OnlyOnePlaceVerticalLine();
-    let sudokuEvents: Array<CantBeFoundEvent> = onlyOnePlaceHorizontalLine.finderLogic(
+    let numberFoundEvents: NumberFoundEvent[] = onlyOnePlaceHorizontalLine.finderLogic(
       [
         cantBeNumber1AtPostion(0, 1),
         cantBeNumber1AtPostion(1, 1),
@@ -28,9 +29,9 @@ describe("OnlyOnePlaceVerticalLine", () => {
       ]
     );
 
-    expect(sudokuEvents.length).toBe(1);
-    expect(sudokuEvents[0].getNumber()).toBe(1);
-    expect(sudokuEvents[0].getPosition().getXKoordinate()).toBe(8);
-    expect(sudokuEvents[0].getPosition().getYKoordinate()).toBe(1);
+    expect(numberFoundEvents.length).toBe(1);
+    expect(numberFoundEvents[0].getNumber()).toBe(1);
+    expect(numberFoundEvents[0].getPosition().getXKoordinate()).toBe(8);
+    expect(numberFoundEvents[0].getPosition().getYKoordinate()).toBe(1);
   });
 });

@@ -40,7 +40,7 @@ export default class OnlyOnePlaceBox implements CantBe2NumberFound {
   }
 
   finderLogic(cantBes: Array<CantBeFoundEvent>) {
-    const results = [];
+    const results: NumberFoundEvent[] = [];
     for (let info of cantBes) {
       let position = info.getPosition();
       let nTNumber = info.getNumber();

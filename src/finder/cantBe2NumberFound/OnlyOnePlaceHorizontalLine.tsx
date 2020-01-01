@@ -26,7 +26,7 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
     return speicher;
   }
 
-  finderLogic(cantBes: Array<CantBeFoundEvent>): Array<CantBeFoundEvent> {
+  finderLogic(cantBes: Array<CantBeFoundEvent>): Array<NumberFoundEvent> {
     const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
