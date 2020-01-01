@@ -1,13 +1,11 @@
 import OnlyOnePlaceHorizontalLine from "./OnlyOnePlaceHorizontalLine";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
-import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("onlyOnePlaceHorizontalLine", () => {
   function cantBeNumber1AtPostion(xKoordinate: number, koordinate2: number) {
     return new CantBeFoundEvent(
-      SudokuEventType.CANT_BE,
       new SudokuPosition(xKoordinate, koordinate2),
       1,
       ""

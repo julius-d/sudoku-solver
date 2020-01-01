@@ -1,5 +1,4 @@
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
-import SudokuEventType from "../../sudoku/SudokuEventType";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import OnlyOnePlaceVerticalLine from "./OnlyOnePlaceVerticalLine";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
@@ -7,7 +6,6 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 describe("OnlyOnePlaceVerticalLine", () => {
   function cantBeNumber1AtPostion(xKoordinate: number, yKoordinate: number) {
     return new CantBeFoundEvent(
-      SudokuEventType.CANT_BE,
       new SudokuPosition(xKoordinate, yKoordinate),
       1,
       ""
