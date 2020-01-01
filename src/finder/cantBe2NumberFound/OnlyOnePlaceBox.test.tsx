@@ -5,9 +5,9 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
-    function cantBeNumber1AtPosition(xCoordinate: number, coordinate2: number) {
+    function cantBeNumber1AtPosition(xCoordinate: number, yCoordinate: number) {
       return new CantBeFoundEvent(
-        new SudokuPosition(xCoordinate, coordinate2),
+        new SudokuPosition(xCoordinate, yCoordinate),
         1,
         ""
       );

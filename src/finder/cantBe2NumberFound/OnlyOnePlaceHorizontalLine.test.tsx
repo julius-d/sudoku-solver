@@ -4,9 +4,9 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 
 describe("onlyOnePlaceHorizontalLine", () => {
-  function cantBeNumber1AtPosition(xCoordinate: number, coordinate2: number) {
+  function cantBeNumber1AtPosition(xCoordinate: number, yCoordinate: number) {
     return new CantBeFoundEvent(
-      new SudokuPosition(xCoordinate, coordinate2),
+      new SudokuPosition(xCoordinate, yCoordinate),
       1,
       ""
     );
