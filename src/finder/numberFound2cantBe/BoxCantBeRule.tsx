@@ -10,7 +10,6 @@ export default class BoxCantBeRule implements NumberFound2CantBe {
     const result = [];
     const box = SudokuBox.createByPosition(numberFoundEvent.getPosition());
 
-    //  @ts-ignore
     for (let position of box.allSudokuPositionInThisBox()) {
       if (
         position.getYCoordinate() !==
