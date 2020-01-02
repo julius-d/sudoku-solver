@@ -8,7 +8,7 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
    * Es wird für jede Reihe(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
   speicher: Map<number, Map<number, Array<SudokuPosition>>>;
-  name = "OnlyOnePlaceVerticalLine";
+  readonly name = "OnlyOnePlaceVerticalLine";
 
   constructor() {
     this.speicher = OnlyOnePlaceVerticalLine.initSpeicher();
