@@ -52,12 +52,11 @@ export default class OnlyOnePlaceBox implements CantBe2NumberFound {
       if (notHeres && !notHeres.find(it => samePosition(position, it))) {
         notHeres.push(position);
         if (notHeres.length === 8) {
-          // @ts-ignore
-          for (let newPos of box.allSudokuPositionInThisBox()) {
+          box.allSudokuPositionInThisBox().forEach(newPos => {
             if (!notHeres.find(it => samePosition(newPos, it))) {
               results.push(new NumberFoundEvent(newPos, nTNumber, this.name)); //FIXME
             }
-          }
+          });
         }
       }
     }
