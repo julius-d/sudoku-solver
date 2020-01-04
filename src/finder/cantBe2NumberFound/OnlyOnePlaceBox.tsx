@@ -3,6 +3,7 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import SudokuNumber from "../../sudoku/SudokuNumber";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
   return (
@@ -15,28 +16,28 @@ export default class OnlyOnePlaceBox implements CantBe2NumberFound {
   /**
    * Es wird für jede Box für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  speicher: Map<
+  private readonly memory: Map<
     SudokuBox,
-    Map<number, Array<SudokuPosition>>
+    Map<SudokuNumber, Array<SudokuPosition>>
   > = OnlyOnePlaceBox.init();
-  name = "OnlyOnePlaceBox";
+  private readonly name = "OnlyOnePlaceBox";
 
   private static init() {
-    const speicher = new Map<SudokuBox, Map<number, Array<SudokuPosition>>>();
+    const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const memory = new Map<
+      SudokuBox,
+      Map<SudokuNumber, Array<SudokuPosition>>
+    >();
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
-        let map1 = new Map<number, Array<SudokuPosition>>();
-        speicher.set(SudokuBox.create(x, y), map1);
+        let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
+        numbers.forEach(i => {
+          map1.set(i, []);
+        });
+        memory.set(SudokuBox.create(x, y), map1);
       }
     }
-    speicher.values();
-    // @ts-ignore
-    for (let map of speicher.values()) {
-      for (let i = 1; i <= 9; i++) {
-        map.set(i, []);
-      }
-    }
-    return speicher;
+    return memory;
   }
 
   finderLogic(cantBes: Array<CantBeFoundEvent>) {
@@ -47,7 +48,7 @@ export default class OnlyOnePlaceBox implements CantBe2NumberFound {
       let box: SudokuBox = SudokuBox.createByPosition(position);
 
       // @ts-ignore
-      const notHeres = this.speicher.get(box).get(nTNumber);
+      const notHeres = this.memory.get(box).get(nTNumber);
       if (notHeres && !notHeres.find(it => samePosition(position, it))) {
         notHeres.push(position);
         if (notHeres.length === 8) {
