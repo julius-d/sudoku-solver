@@ -1,8 +1,11 @@
-export default class SudokuPosition {
-  readonly xCoordinate: number;
-  readonly yCoordinate: number;
+import SudokuXCoordinate from "./SudokuXCoordinate";
+import SudokuYCoordinate from "./SudokuYCoordinate";
 
-  constructor(xCoordinate: number, yCoordinate: number) {
+export default class SudokuPosition {
+  readonly xCoordinate: SudokuXCoordinate;
+  readonly yCoordinate: SudokuYCoordinate;
+
+  constructor(xCoordinate: SudokuXCoordinate, yCoordinate: SudokuYCoordinate) {
     this.xCoordinate = xCoordinate;
     this.yCoordinate = yCoordinate;
   }

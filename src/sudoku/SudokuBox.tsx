@@ -1,12 +1,16 @@
 import SudokuPosition from "./SudokuPosition";
+import SudokuYCoordinate from "./SudokuYCoordinate";
+import SudokuXCoordinate from "./SudokuXCoordinate";
+
+type BoxCoordinate = 0 | 1 | 2;
 
 export default class SudokuBox {
-  private readonly x: number;
-  private readonly y: number;
+  private readonly x: BoxCoordinate;
+  private readonly y: BoxCoordinate;
 
   private static allInstances: SudokuBox[][] = SudokuBox.createAll();
 
-  private constructor(x: number, y: number) {
+  private constructor(x: BoxCoordinate, y: BoxCoordinate) {
     if (x < 0 || y < 0 || x > 2 || y > 2) {
       throw new Error("illegal argument x:" + x + " y: " + y);
     }
@@ -27,22 +31,46 @@ export default class SudokuBox {
   }
 
   private static createAll() {
-    const all: SudokuBox[][] = [];
-    for (let x = 0; x < 3; x++) {
-      all[x] = [];
-      for (let y = 0; y < 3; y++) {
+    const allBoxCoordinates: BoxCoordinate[] = [0, 1, 2];
+    const all: SudokuBox[][] = [[], [], []];
+    allBoxCoordinates.forEach(x => {
+      allBoxCoordinates.forEach(y => {
         all[x][y] = new SudokuBox(x, y);
-      }
-    }
+      });
+    });
     return all;
   }
 
   static createByPosition(postion: SudokuPosition) {
-    let x = postion.getXCoordinate();
-    let y = postion.getYCoordinate();
-    x = Math.trunc(x / 3);
-    y = Math.trunc(y / 3);
-    return this.allInstances[x][y];
+    const x = postion.getXCoordinate();
+    const y = postion.getYCoordinate();
+    const boxXCoordinate = this.boxCoordinateFor(x);
+    const boxYCoordinate = this.boxCoordinateFor(y);
+    return this.allInstances[boxXCoordinate][boxYCoordinate];
+  }
+
+  private static boxCoordinateFor(
+    coordinate: SudokuXCoordinate | SudokuYCoordinate
+  ) {
+    if (coordinate === 0 || coordinate === 1 || coordinate === 2) {
+      return 0;
+    } else if (coordinate === 3 || coordinate === 4 || coordinate === 5) {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
+  private static sudokuCoordinateFor(
+    coordinate: BoxCoordinate
+  ): Array<SudokuXCoordinate | SudokuYCoordinate> {
+    if (coordinate === 0) {
+      return [0, 1, 2];
+    } else if (coordinate === 1) {
+      return [3, 4, 5];
+    } else {
+      return [6, 7, 8];
+    }
   }
 
   static create(x: number, y: number) {
@@ -50,21 +78,13 @@ export default class SudokuBox {
   }
 
   allSudokuPositionInThisBox() {
-    let xAdd = 0;
-    let yAdd = 0;
-    let stepp = 0;
-    let hasNext = true;
-
-    let result = [];
-    while (hasNext) {
-      const position = new SudokuPosition(this.x * 3 + xAdd, this.y * 3 + yAdd);
-      if (++stepp >= 9) {
-        hasNext = false;
-      }
-      xAdd = stepp % 3;
-      yAdd = Math.trunc(stepp / 3);
-      result.push(position);
-    }
+    let result: SudokuPosition[] = [];
+    SudokuBox.sudokuCoordinateFor(this.x).forEach(xC => {
+      SudokuBox.sudokuCoordinateFor(this.y).forEach(yC => {
+        const position = new SudokuPosition(xC, yC);
+        result.push(position);
+      });
+    });
     return result;
   }
 

@@ -2,10 +2,15 @@ import OnlyOnePlaceBox from "./OnlyOnePlaceBox";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import SudokuXCoordinate from "../../sudoku/SudokuXCoordinate";
+import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
 
 describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
-    function cantBeNumber1AtPosition(xCoordinate: number, yCoordinate: number) {
+    function cantBeNumber1AtPosition(
+      xCoordinate: SudokuXCoordinate,
+      yCoordinate: SudokuYCoordinate
+    ) {
       return new CantBeFoundEvent(
         new SudokuPosition(xCoordinate, yCoordinate),
         1,

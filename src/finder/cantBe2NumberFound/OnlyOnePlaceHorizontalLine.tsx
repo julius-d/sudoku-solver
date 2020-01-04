@@ -3,6 +3,7 @@ import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import SudokuNumber from "../../sudoku/SudokuNumber";
+import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
 
 export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
   /**
@@ -68,11 +69,12 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
   private static onlyPossiblePosition(
     canBeForNumberInLine: SudokuPosition[]
   ): SudokuPosition {
-    for (let i = 0; i < 9; i++) {
+    const yCoordinates: SudokuYCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    yCoordinates.forEach(i => {
       if (!canBeForNumberInLine.find(it => it.getYCoordinate() === i)) {
         return new SudokuPosition(canBeForNumberInLine[0].getXCoordinate(), i);
       }
-    }
-    throw new Error("shoudl not happen");
+    });
+    throw new Error("should not happen");
   }
 }

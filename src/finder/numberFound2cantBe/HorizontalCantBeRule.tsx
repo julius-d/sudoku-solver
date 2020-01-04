@@ -2,15 +2,17 @@ import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import NumberFound2CantBe from "./NumberFound2CantBe";
+import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
 
 export default class HorizontalCantBeRule implements NumberFound2CantBe {
   name = "HorizontalCantBeRule";
 
   finderLogic(numberFoundEvent: NumberFoundEvent) {
-    const result = [];
+    const result: CantBeFoundEvent[] = [];
+    const yCoordinates: SudokuYCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     let xk = numberFoundEvent.getPosition().getXCoordinate();
-    for (let yk = 0; yk < 9; yk++) {
+    yCoordinates.forEach(yk => {
       if (yk !== numberFoundEvent.getPosition().getYCoordinate()) {
         result.push(
           new CantBeFoundEvent(
@@ -20,7 +22,7 @@ export default class HorizontalCantBeRule implements NumberFound2CantBe {
           )
         );
       }
-    }
+    });
 
     return result;
   }

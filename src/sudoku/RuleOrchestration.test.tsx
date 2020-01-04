@@ -4,6 +4,8 @@ import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 import CantBeFoundEvent from "./CantBeFoundEvent";
 import SudokuNumber from "./SudokuNumber";
+import SudokuXCoordinate from "./SudokuXCoordinate";
+import SudokuYCoordinate from "./SudokuYCoordinate";
 
 describe("RuleOrchestration", () => {
   let ruleOrchestration = new RuleOrchestration();
@@ -51,7 +53,10 @@ describe("RuleOrchestration", () => {
           field[lineIndex][rowIndex] = givenNumber;
           if (givenNumber !== "_") {
             let numberFoundEvent = new NumberFoundEvent(
-              new SudokuPosition(lineIndex, rowIndex),
+              new SudokuPosition(
+                lineIndex as SudokuXCoordinate,
+                rowIndex as SudokuYCoordinate
+              ),
               parseInt(givenNumber, 10) as SudokuNumber,
               "USER"
             );
