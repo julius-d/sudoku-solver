@@ -37,10 +37,9 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
     const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
-        // @ts-ignore
         this.speicher
           .get(cantBe.getPosition().getYCoordinate())
-          .get(cantBe.getNumber()) || []; // TODO handle undefined
+          ?.get(cantBe.getNumber()) || []; // TODO handle undefined
       if (
         !canBeForNumberInLine.find(
           it =>

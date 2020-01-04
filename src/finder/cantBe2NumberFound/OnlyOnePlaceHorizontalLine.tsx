@@ -9,7 +9,10 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
   /**
    * Es wird für jede Zeile(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  private memory: Map<number, Map<SudokuNumber, Array<SudokuPosition>>>;
+  private readonly memory: Map<
+    number,
+    Map<SudokuNumber, Array<SudokuPosition>>
+  >;
   private readonly name = "OnlyOnePlaceHorizontalLine";
 
   constructor() {
@@ -34,10 +37,9 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
     const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
-        // @ts-ignore
         this.memory
           .get(cantBe.getPosition().getXCoordinate())
-          .get(cantBe.getNumber()) || []; // TODO handle undefine
+          ?.get(cantBe.getNumber()) || []; // TODO handle undefine
       if (
         !canBeForNumberInLine.find(
           it =>
@@ -60,10 +62,6 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
       }
     });
     return result;
-  }
-
-  reset() {
-    this.memory = OnlyOnePlaceHorizontalLine.initMemory();
   }
 
   private static onlyPossiblePosition(

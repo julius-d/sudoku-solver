@@ -47,8 +47,7 @@ export default class OnlyOnePlaceBox implements CantBe2NumberFound {
       let nTNumber = info.getNumber();
       let box: SudokuBox = SudokuBox.createByPosition(position);
 
-      // @ts-ignore
-      const notHeres = this.memory.get(box).get(nTNumber);
+      const notHeres = this.memory.get(box)?.get(nTNumber);
       if (notHeres && !notHeres.find(it => samePosition(position, it))) {
         notHeres.push(position);
         if (notHeres.length === 8) {
