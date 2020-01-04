@@ -3,6 +3,7 @@ import RuleOrchestration from "./RuleOrchestration";
 import SudokuPosition from "./SudokuPosition";
 import SudokuEventType from "./SudokuEventType";
 import CantBeFoundEvent from "./CantBeFoundEvent";
+import SudokuNumber from "./SudokuNumber";
 
 describe("RuleOrchestration", () => {
   let ruleOrchestration = new RuleOrchestration();
@@ -51,7 +52,7 @@ describe("RuleOrchestration", () => {
           if (givenNumber !== "_") {
             let numberFoundEvent = new NumberFoundEvent(
               new SudokuPosition(lineIndex, rowIndex),
-              parseInt(givenNumber, 10),
+              parseInt(givenNumber, 10) as SudokuNumber,
               "USER"
             );
             ruleOrchestration.handleGivenNumber(numberFoundEvent, handleEvent);

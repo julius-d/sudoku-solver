@@ -2,28 +2,31 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import SudokuNumber from "../../sudoku/SudokuNumber";
 
 export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
   /**
    * Es wird für jede Zeile(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  speicher: Map<number, Map<number, Array<SudokuPosition>>>;
-  name = "OnlyOnePlaceHorizontalLine";
+  private memory: Map<number, Map<SudokuNumber, Array<SudokuPosition>>>;
+  private readonly name = "OnlyOnePlaceHorizontalLine";
 
   constructor() {
-    this.speicher = OnlyOnePlaceHorizontalLine.initSpeicher();
+    this.memory = OnlyOnePlaceHorizontalLine.initMemory();
   }
 
-  static initSpeicher() {
-    const speicher = new Map<number, Map<number, Array<SudokuPosition>>>();
+  private static initMemory() {
+    const memory = new Map<number, Map<SudokuNumber, Array<SudokuPosition>>>();
+    const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
     for (let x: number = 0; x < 9; x++) {
-      let map1 = new Map<number, Array<SudokuPosition>>();
-      for (let i: number = 1; i <= 9; i++) {
+      let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
+      numbers.forEach(i => {
         map1.set(i, []);
-      }
-      speicher.set(x, map1);
+      });
+      memory.set(x, map1);
     }
-    return speicher;
+    return memory;
   }
 
   finderLogic(cantBes: Array<CantBeFoundEvent>): Array<NumberFoundEvent> {
@@ -31,9 +34,9 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
         // @ts-ignore
-        this.speicher
+        this.memory
           .get(cantBe.getPosition().getXCoordinate())
-          .get(cantBe.getNumber()) || []; // TOOD handle undefine
+          .get(cantBe.getNumber()) || []; // TODO handle undefine
       if (
         !canBeForNumberInLine.find(
           it =>
@@ -59,7 +62,7 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
   }
 
   reset() {
-    this.speicher = OnlyOnePlaceHorizontalLine.initSpeicher();
+    this.memory = OnlyOnePlaceHorizontalLine.initMemory();
   }
 
   private static onlyPossiblePosition(

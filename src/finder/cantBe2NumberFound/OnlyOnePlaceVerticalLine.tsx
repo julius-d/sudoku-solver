@@ -2,12 +2,13 @@ import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import SudokuNumber from "../../sudoku/SudokuNumber";
 
 export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
   /**
    * Es wird für jede Reihe(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  speicher: Map<number, Map<number, Array<SudokuPosition>>>;
+  speicher: Map<number, Map<SudokuNumber, Array<SudokuPosition>>>;
   readonly name = "OnlyOnePlaceVerticalLine";
 
   constructor() {
@@ -33,7 +34,7 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
         // @ts-ignore
         this.speicher
           .get(cantBe.getPosition().getYCoordinate())
-          .get(cantBe.getNumber()) || []; // TOOD handle undefine
+          .get(cantBe.getNumber()) || []; // TODO handle undefined
       if (
         !canBeForNumberInLine.find(
           it =>

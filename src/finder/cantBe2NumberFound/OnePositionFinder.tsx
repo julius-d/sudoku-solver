@@ -1,6 +1,7 @@
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
 import CantBe2NumberFound from "./CantBe2NumberFound";
 import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
+import SudokuNumber from "../../sudoku/SudokuNumber";
 
 export default class OnePositionFinder implements CantBe2NumberFound {
   notThisNumber: boolean[][][] = OnePositionFinder.createBoolean3dArray();
@@ -8,16 +9,18 @@ export default class OnePositionFinder implements CantBe2NumberFound {
 
   finderLogic(cantBes: CantBeFoundEvent[]) {
     const results: NumberFoundEvent[] = [];
-    for (let info of cantBes) {
-      const position = info.getPosition();
-      const nTNumber = info.getNumber();
+    for (let event of cantBes) {
+      const position = event.getPosition();
+      const nTNumber = event.getNumber();
       this.notThisNumber[position.getXCoordinate()][position.getYCoordinate()][
-        nTNumber - 1
+        nTNumber
       ] = true;
 
       let anzFalse = 0;
-      let lastFalsePosition = -1;
-      for (let i = 0; i < 9; i++) {
+      let lastFalsePosition: SudokuNumber | null = null;
+      const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      numbers.forEach(i => {
         if (
           !this.notThisNumber[position.getXCoordinate()][
             position.getYCoordinate()
@@ -26,10 +29,10 @@ export default class OnePositionFinder implements CantBe2NumberFound {
           anzFalse++;
           lastFalsePosition = i;
         }
-      }
-      if (anzFalse === 1) {
+      });
+      if (anzFalse === 1 && lastFalsePosition !== null) {
         results.push(
-          new NumberFoundEvent(position, lastFalsePosition + 1, this.name)
+          new NumberFoundEvent(position, lastFalsePosition, this.name)
         );
       }
     }
