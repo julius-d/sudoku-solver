@@ -73,11 +73,17 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
     canBeForNumberInLine: SudokuPosition[]
   ): SudokuPosition {
     const xCoordinates: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    xCoordinates.forEach(i => {
-      if (!canBeForNumberInLine.find(it => it.getXCoordinate() === i)) {
-        return new SudokuPosition(i, canBeForNumberInLine[0].getYCoordinate());
+    for (let i = 0; i < xCoordinates.length; i++) {
+      let xCoordinate = xCoordinates[i];
+      if (
+        !canBeForNumberInLine.find(it => it.getXCoordinate() === xCoordinate)
+      ) {
+        return new SudokuPosition(
+          xCoordinate,
+          canBeForNumberInLine[0].getYCoordinate()
+        );
       }
-    });
+    }
     throw new Error("should not happen");
   }
 }

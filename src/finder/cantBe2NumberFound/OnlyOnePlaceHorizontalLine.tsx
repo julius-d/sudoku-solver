@@ -70,11 +70,17 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
     canBeForNumberInLine: SudokuPosition[]
   ): SudokuPosition {
     const yCoordinates: SudokuYCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    yCoordinates.forEach(i => {
-      if (!canBeForNumberInLine.find(it => it.getYCoordinate() === i)) {
-        return new SudokuPosition(canBeForNumberInLine[0].getXCoordinate(), i);
+    for (let i = 0; i < yCoordinates.length; i++) {
+      let yCoordinate = yCoordinates[i];
+      if (
+        !canBeForNumberInLine.find(it => it.getYCoordinate() === yCoordinate)
+      ) {
+        return new SudokuPosition(
+          canBeForNumberInLine[0].getXCoordinate(),
+          yCoordinate
+        );
       }
-    });
+    }
     throw new Error("should not happen");
   }
 }
