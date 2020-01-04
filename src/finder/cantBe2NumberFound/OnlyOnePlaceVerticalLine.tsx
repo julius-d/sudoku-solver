@@ -9,35 +9,35 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
   /**
    * Es wird für jede Reihe(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
-  speicher: Map<number, Map<SudokuNumber, Array<SudokuPosition>>>;
-  readonly name = "OnlyOnePlaceVerticalLine";
+  private readonly memory: Map<
+    number,
+    Map<SudokuNumber, Array<SudokuPosition>>
+  >;
+  private readonly name = "OnlyOnePlaceVerticalLine";
 
   constructor() {
-    this.speicher = OnlyOnePlaceVerticalLine.initSpeicher();
+    this.memory = OnlyOnePlaceVerticalLine.initMemory();
   }
 
-  static initSpeicher() {
+  static initMemory() {
     const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-    const speicher = new Map<
-      number,
-      Map<SudokuNumber, Array<SudokuPosition>>
-    >();
+    const memory = new Map<number, Map<SudokuNumber, Array<SudokuPosition>>>();
     for (let x: number = 0; x < 9; x++) {
       let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
       numbers.forEach(i => {
         map1.set(i, []);
       });
-      speicher.set(x, map1);
+      memory.set(x, map1);
     }
-    return speicher;
+    return memory;
   }
 
   finderLogic(cantBes: Array<CantBeFoundEvent>): Array<NumberFoundEvent> {
     const result: Array<NumberFoundEvent> = [];
     cantBes.forEach(cantBe => {
       const canBeForNumberInLine =
-        this.speicher
+        this.memory
           .get(cantBe.getPosition().getYCoordinate())
           ?.get(cantBe.getNumber()) || []; // TODO handle undefined
       if (
@@ -62,10 +62,6 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
       }
     });
     return result;
-  }
-
-  reset() {
-    this.speicher = OnlyOnePlaceVerticalLine.initSpeicher();
   }
 
   private static onlyPossiblePosition(
