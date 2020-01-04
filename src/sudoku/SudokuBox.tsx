@@ -79,8 +79,8 @@ export default class SudokuBox {
 
   allSudokuPositionInThisBox() {
     let result: SudokuPosition[] = [];
-    SudokuBox.sudokuCoordinateFor(this.x).forEach(xC => {
-      SudokuBox.sudokuCoordinateFor(this.y).forEach(yC => {
+    SudokuBox.sudokuCoordinateFor(this.y).forEach(yC => {
+      SudokuBox.sudokuCoordinateFor(this.x).forEach(xC => {
         const position = new SudokuPosition(xC, yC);
         result.push(position);
       });
