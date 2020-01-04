@@ -10,7 +10,7 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
    * Es wird für jede Reihe(0-8) für jede Zahl(1-9) gespeichert, wo sie nicht hin darf.
    */
   private readonly memory: Map<
-    number,
+    SudokuXCoordinate,
     Map<SudokuNumber, Array<SudokuPosition>>
   >;
   private readonly name = "OnlyOnePlaceVerticalLine";
@@ -21,15 +21,19 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
 
   static initMemory() {
     const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const lines: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-    const memory = new Map<number, Map<SudokuNumber, Array<SudokuPosition>>>();
-    for (let x: number = 0; x < 9; x++) {
+    const memory = new Map<
+      SudokuXCoordinate,
+      Map<SudokuNumber, Array<SudokuPosition>>
+    >();
+    lines.forEach(x => {
       let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
       numbers.forEach(i => {
         map1.set(i, []);
       });
       memory.set(x, map1);
-    }
+    });
     return memory;
   }
 
