@@ -4,7 +4,7 @@ import NumberFound2CantBe from "./NumberFound2CantBe";
 import SudokuNumber from "../../sudoku/SudokuNumber";
 
 export default class OnePositionCantBeRule implements NumberFound2CantBe {
-  name = "OnePositionCantBeRule";
+  private readonly name = "OnePositionCantBeRule";
 
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result: CantBeFoundEvent[] = [];

@@ -4,8 +4,8 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import SudokuNumber from "../../sudoku/SudokuNumber";
 
 export default class OnePositionFinder implements CantBe2NumberFound {
-  notThisNumber: boolean[][][] = OnePositionFinder.createBoolean3dArray();
-  name = "OnePositionFinder";
+  private readonly notThisNumber: boolean[][][] = OnePositionFinder.createBoolean3dArray();
+  private readonly name = "OnePositionFinder";
 
   finderLogic(cantBes: CantBeFoundEvent[]) {
     const results: NumberFoundEvent[] = [];

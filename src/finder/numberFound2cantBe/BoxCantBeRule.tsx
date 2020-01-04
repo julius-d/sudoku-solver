@@ -4,7 +4,7 @@ import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import NumberFound2CantBe from "./NumberFound2CantBe";
 
 export default class BoxCantBeRule implements NumberFound2CantBe {
-  private ruleName = "BoxCantBeRule";
+  private readonly ruleName = "BoxCantBeRule";
 
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result = [];

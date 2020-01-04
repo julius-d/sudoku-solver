@@ -5,7 +5,7 @@ import NumberFound2CantBe from "./NumberFound2CantBe";
 import SudokuXCoordinate from "../../sudoku/SudokuXCoordinate";
 
 export default class VerticalCantBeRule implements NumberFound2CantBe {
-  name = "VerticalCantBeRule";
+  private readonly name = "VerticalCantBeRule";
 
   finderLogic(numberFoundEvent: NumberFoundEvent) {
     const result: CantBeFoundEvent[] = [];
