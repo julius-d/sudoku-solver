@@ -16,12 +16,17 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
   }
 
   static initSpeicher() {
-    const speicher = new Map<number, Map<number, Array<SudokuPosition>>>();
+    const numbers: SudokuNumber[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    const speicher = new Map<
+      number,
+      Map<SudokuNumber, Array<SudokuPosition>>
+    >();
     for (let x: number = 0; x < 9; x++) {
-      let map1 = new Map<number, Array<SudokuPosition>>();
-      for (let i: number = 1; i <= 9; i++) {
+      let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
+      numbers.forEach(i => {
         map1.set(i, []);
-      }
+      });
       speicher.set(x, map1);
     }
     return speicher;
