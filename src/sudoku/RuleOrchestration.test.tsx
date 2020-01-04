@@ -8,7 +8,7 @@ describe("RuleOrchestration", () => {
   let ruleOrchestration = new RuleOrchestration();
   let field: string[][] = [[], [], [], [], [], [], [], [], []];
 
-  it("nearly solves sudoku", () => {
+  it("solves sudoku", () => {
     givenNumbers([
       "_1_4__82_",
       "_8_1__5_9",
@@ -30,7 +30,7 @@ describe("RuleOrchestration", () => {
       "735849216",
       "391685472",
       "258374691",
-      "6__9_2___"
+      "647912385"
     ]);
   });
 
@@ -46,14 +46,16 @@ describe("RuleOrchestration", () => {
   function givenNumbers(lines: string[]) {
     lines.forEach((line, lineIndex) => {
       line.split("").forEach((givenNumber, rowIndex) => {
-        field[lineIndex][rowIndex] = givenNumber;
-        if (givenNumber !== "_") {
-          let numberFoundEvent = new NumberFoundEvent(
-            new SudokuPosition(lineIndex, rowIndex),
-            parseInt(givenNumber, 10),
-            "USER"
-          );
-          ruleOrchestration.handleGivenNumber(numberFoundEvent, handleEvent);
+        if (!field[lineIndex][rowIndex]) {
+          field[lineIndex][rowIndex] = givenNumber;
+          if (givenNumber !== "_") {
+            let numberFoundEvent = new NumberFoundEvent(
+              new SudokuPosition(lineIndex, rowIndex),
+              parseInt(givenNumber, 10),
+              "USER"
+            );
+            ruleOrchestration.handleGivenNumber(numberFoundEvent, handleEvent);
+          }
         }
       });
     });
