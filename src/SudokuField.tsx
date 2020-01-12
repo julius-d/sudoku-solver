@@ -40,13 +40,18 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
     } = props;
 
     const borderClassName = createBorderClassName(rowNumber, colNumber);
+    const numberFoundByUser = numberFoundBy === "USER";
     return (
-      <td className={`tg-0lax ${borderClassName}`}>
+      <td
+        className={`tg-0lax ${borderClassName} ${
+          foundNumber && !numberFoundByUser ? "highlight" : ""
+        }`}
+      >
         {foundNumber ? (
           <div
             style={{
               fontSize: 24,
-              fontWeight: numberFoundBy === "USER" ? "bold" : "normal"
+              fontWeight: numberFoundByUser ? "bold" : "normal"
             }}
           >
             {foundNumber}

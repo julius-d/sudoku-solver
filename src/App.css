@@ -62,3 +62,25 @@
     border-collapse: collapse;
   }
 }
+
+.highlight {
+  animation: pulse 5s;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #ffffff;
+  }
+  25% {
+    background-color: #ffff00;
+  }
+  50% {
+    background-color: #ffc40f;
+  }
+  75% {
+    background-color: #ffff00;
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
