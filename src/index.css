@@ -11,3 +11,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#timeline {
+  position: relative;
+  margin-left: 4.5em;
+  list-style-type: none;
+}
+
+#timeline::before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  top: 0;
+  background: #b2beb5;
+  width: 0.2em;
+}
+
+#timeline > div::before {
+  position: absolute;
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  left: -0.21em;
+  border-radius: 50%;
+  background: #b2beb5;
+}
+
+#timeline > div {
+  margin-bottom: 0.5em;
+}
+
+div p {
+  margin: -1em 0 0 1em;
+}
+
+time {
+  display: block;
+  margin-left: -4.3em;
+  width: 3.5em;
+  text-align: right;
+}

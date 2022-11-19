@@ -33,7 +33,7 @@ export default class RuleOrchestration {
     numberFoundEvent: NumberFoundEvent,
     postMessage: (e: CantBeFoundEvent | NumberFoundEvent) => void
   ) {
-    let foundNumbers = [numberFoundEvent];
+    let foundNumbers = eventFilter.removeAlreadySeen([numberFoundEvent]);
     do {
       let cantBeRulesResults: CantBeFoundEvent[] = [];
       for (const rule of numberFound2cantBeRules) {

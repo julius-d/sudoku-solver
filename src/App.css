@@ -63,8 +63,12 @@
   }
 }
 
-.highlight {
+.highlight-found {
   animation: pulse 5s;
+}
+
+.highlight {
+  animation: pulse2 5s;
 }
 
 @keyframes pulse {
@@ -79,6 +83,24 @@
   }
   75% {
     background-color: #ffff00;
+  }
+  100% {
+    background-color: #ffffff;
+  }
+}
+
+@keyframes pulse2 {
+  0% {
+    background-color: #ffffff;
+  }
+  25% {
+    background-color: #34b1e2;
+  }
+  50% {
+    background-color: #7ff393;
+  }
+  75% {
+    background-color: #34b1e2;
   }
   100% {
     background-color: #ffffff;

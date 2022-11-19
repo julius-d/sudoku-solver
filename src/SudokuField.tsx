@@ -8,6 +8,7 @@ interface SudokuFieldProps {
   fieldName: string;
   numberFoundBy: string;
   handleChange: () => void;
+  highlight: boolean;
 }
 
 function createBorderClassName(rowNumber: number, colNumber: number) {
@@ -36,16 +37,20 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
       cantBes,
       handleChange,
       fieldName,
-      numberFoundBy
+      numberFoundBy,
+      highlight
     } = props;
 
     const borderClassName = createBorderClassName(rowNumber, colNumber);
     const numberFoundByUser = numberFoundBy === "USER";
+    const highlightForFound = foundNumber && !numberFoundByUser;
     return (
       <td
         className={`tg-0lax ${borderClassName} ${
-          foundNumber && !numberFoundByUser ? "highlight" : ""
-        }`}
+          highlightForFound ? "highlight-found" : ""
+        }
+        ${highlight ? "highlight" : ""}
+        `}
       >
         {foundNumber ? (
           <div
