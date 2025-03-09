@@ -22,8 +22,11 @@ describe("SudokuPosition", () => {
   });
 
   it("all 81 instances exist", () => {
-    for (let x: SudokuXCoordinate = 0; x < 9; x++) {
-      for (let y: SudokuYCoordinate = 0; y < 9; y++) {
+    const xCoordinates: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const yCoordinates: SudokuYCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    for (let x of xCoordinates) {
+      for (let y of yCoordinates) {
         expect(SudokuPosition.of(x, y)).toBeDefined();
       }
     }
