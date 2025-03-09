@@ -1,6 +1,5 @@
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import CantBeFoundEvent from "../../sudoku/CantBeFoundEvent";
-import NumberFoundEvent from "../../sudoku/NumberFoundEvent";
 import SudokuNumber from "../../sudoku/SudokuNumber";
 import SudokuXCoordinate from "../../sudoku/SudokuXCoordinate";
 import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
@@ -42,7 +41,7 @@ export default class PairBasedExcluderInVerticalLine implements CantBe2CantBe {
     return memory;
   }
 
-  finderLogic(cantBes: Array<CantBeFoundEvent>) : CantBeFoundEvent[] {
+  finderLogic(cantBes: Array<CantBeFoundEvent>): CantBeFoundEvent[] {
     const results: CantBeFoundEvent[] = [];
     for (let info of cantBes) {
       let position = info.getPosition();
@@ -50,15 +49,15 @@ export default class PairBasedExcluderInVerticalLine implements CantBe2CantBe {
       let box: SudokuBox = SudokuBox.createByPosition(position);
 
       const notHeres = this.memory.get(box)?.get(nTNumber);
-      if (notHeres  &&!notHeres.find(it => samePosition(position, it))) {
+      if (notHeres && !notHeres.find(it => samePosition(position, it))) {
         notHeres.push(position);
         if (notHeres.length >= 6 && notHeres.length <= 7) {
 
           const possiblePositions: SudokuPosition[] = getAllPossiblePositions(notHeres, box);
-          const yCoordinatesOfPossiblePositions : SudokuYCoordinate[] = getYCoordinatesOf(possiblePositions);
-          if(yCoordinatesOfPossiblePositions.length === 1) {
+          const yCoordinatesOfPossiblePositions: SudokuYCoordinate[] = getYCoordinatesOf(possiblePositions);
+          if (yCoordinatesOfPossiblePositions.length === 1) {
             // TADA gefunden
-            const newCantBeFoundEvent : CantBeFoundEvent[] = generateCantBeFoundEventFor(yCoordinatesOfPossiblePositions[0], nTNumber, box);
+            const newCantBeFoundEvent: CantBeFoundEvent[] = generateCantBeFoundEventFor(yCoordinatesOfPossiblePositions[0], nTNumber, box);
             results.push(...newCantBeFoundEvent);
           }
         }
@@ -71,21 +70,21 @@ export default class PairBasedExcluderInVerticalLine implements CantBe2CantBe {
 function getAllPossiblePositions(notHeres: SudokuPosition[], box: SudokuBox): SudokuPosition[] {
   return box.allSudokuPositionInThisBox().filter(pos => {
     notHeres.indexOf(pos) >= 0;
-  }); 
+  });
 }
 
-function getYCoordinatesOf(possiblePositions: SudokuPosition[]):  SudokuYCoordinate[] {
+function getYCoordinatesOf(possiblePositions: SudokuPosition[]): SudokuYCoordinate[] {
   return distinct(possiblePositions.map(pos => pos.getYCoordinate()));
 }
 
-function distinct<T>(list : Array<T>) : Array<T> {
+function distinct<T>(list: Array<T>): Array<T> {
   return list.filter((e, i, self) => i === self.indexOf(e));
 }
 
 function generateCantBeFoundEventFor(yCoordinatesOfPossiblePositions: SudokuYCoordinate, nTNumber: SudokuNumber, box: SudokuBox): CantBeFoundEvent[] {
- const allXCoords : SudokuXCoordinate[] = [0,1,2,3,4,5,6,7,8];
+  const allXCoords: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   return allXCoords
-  .map(xCooridnate => new SudokuPosition(xCooridnate, yCoordinatesOfPossiblePositions))
-  .filter(it => box.allSudokuPositionInThisBox().indexOf(it)<0 )
-  .map(pos => new CantBeFoundEvent(pos, nTNumber, PairBasedExcluderInVerticalLine.name));
+    .map(xCooridnate => new SudokuPosition(xCooridnate, yCoordinatesOfPossiblePositions))
+    .filter(it => box.allSudokuPositionInThisBox().indexOf(it) < 0)
+    .map(pos => new CantBeFoundEvent(pos, nTNumber, PairBasedExcluderInVerticalLine.name));
 }
