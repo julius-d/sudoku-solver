@@ -16,7 +16,7 @@ export default class HorizontalCantBeRule implements NumberFound2CantBe {
       if (yk !== numberFoundEvent.getPosition().getYCoordinate()) {
         result.push(
           new CantBeFoundEvent(
-            new SudokuPosition(xk, yk),
+            SudokuPosition.of(xk, yk),
             numberFoundEvent.getNumber(),
             this.name
           )

@@ -8,8 +8,13 @@ import SudokuXCoordinate from "./SudokuXCoordinate";
 import SudokuYCoordinate from "./SudokuYCoordinate";
 
 describe("RuleOrchestration", () => {
-  let ruleOrchestration = new RuleOrchestration();
-  let field: string[][] = [[], [], [], [], [], [], [], [], []];
+  let ruleOrchestration: RuleOrchestration;
+  let field: string[][];
+
+  beforeEach(() => {
+    ruleOrchestration = new RuleOrchestration();
+    field = [[], [], [], [], [], [], [], [], []];
+  });
 
   it("solves sudoku", () => {
     givenNumbers([
@@ -37,12 +42,38 @@ describe("RuleOrchestration", () => {
     ]);
   });
 
+  it("solves hard sudoku", () => {
+    givenNumbers([
+      "9____14__",
+      "_7_____8_",
+      "___6_5_1_",
+      "__4_6__3_",
+      "1___9___2",
+      "_9__5_1__",
+      "_3_8_2___",
+      "_8_____7_",
+      "__63____4",
+    ]);
+
+    thenSolutionIs([
+      "9__7_14__",
+      "_719_4_8_",
+      "_4_6_5_1_",
+      "_2416__3_",
+      "1__49___2",
+      "_9_25_14_",
+      "_3_8_2_9_",
+      "_895_6_7_",
+      "_163798_4"
+    ]);
+  });
+
   function handleEvent(numberFoundEvent: NumberFoundEvent | CantBeFoundEvent) {
     if (numberFoundEvent.type === SudokuEventType.NUMBER_FOUND) {
       let position = numberFoundEvent.getPosition();
       field[position.getXCoordinate()][
         position.getYCoordinate()
-      ] = numberFoundEvent.getNumber().toString(10);
+        ] = numberFoundEvent.getNumber().toString(10);
     }
   }
 
@@ -53,7 +84,7 @@ describe("RuleOrchestration", () => {
           field[lineIndex][rowIndex] = givenNumber;
           if (givenNumber !== "_") {
             let numberFoundEvent = new NumberFoundEvent(
-              new SudokuPosition(
+              SudokuPosition.of(
                 lineIndex as SudokuXCoordinate,
                 rowIndex as SudokuYCoordinate
               ),
