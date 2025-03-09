@@ -17,7 +17,7 @@ describe("PairBasedExcluderInVerticalLine", () => {
   }
 
   function pos(x: SudokuXCoordinate, y: SudokuYCoordinate) {
-    return new SudokuPosition(x, y)
+    return SudokuPosition.of(x, y)
   }
 
   it("finds exclusions", () => {

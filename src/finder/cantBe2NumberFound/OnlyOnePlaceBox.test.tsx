@@ -12,7 +12,7 @@ describe("OnlyOnePlaceBox", () => {
       yCoordinate: SudokuYCoordinate
     ) {
       return new CantBeFoundEvent(
-        new SudokuPosition(xCoordinate, yCoordinate),
+        SudokuPosition.of(xCoordinate, yCoordinate),
         1,
         ""
       );

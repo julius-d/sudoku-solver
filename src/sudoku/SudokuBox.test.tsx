@@ -3,7 +3,7 @@ import SudokuPosition from "./SudokuPosition";
 
 describe("SudokuBox", () => {
   it("crates positions", () => {
-    let sudokuBox = SudokuBox.createByPosition(new SudokuPosition(0, 1));
+    let sudokuBox = SudokuBox.createByPosition(SudokuPosition.of(0, 1));
     let allPositionInBox = sudokuBox.allSudokuPositionInThisBox();
 
     expect(allPositionInBox.length).toBe(9);

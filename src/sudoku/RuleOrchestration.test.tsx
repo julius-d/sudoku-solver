@@ -53,7 +53,7 @@ describe("RuleOrchestration", () => {
           field[lineIndex][rowIndex] = givenNumber;
           if (givenNumber !== "_") {
             let numberFoundEvent = new NumberFoundEvent(
-              new SudokuPosition(
+              SudokuPosition.of(
                 lineIndex as SudokuXCoordinate,
                 rowIndex as SudokuYCoordinate
               ),

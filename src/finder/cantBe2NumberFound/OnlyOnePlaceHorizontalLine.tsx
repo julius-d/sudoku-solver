@@ -73,7 +73,7 @@ export default class OnlyOnePlaceHorizontalLine implements CantBe2NumberFound {
       if (
         !canBeForNumberInLine.find(it => it.getYCoordinate() === yCoordinate)
       ) {
-        return new SudokuPosition(
+        return SudokuPosition.of(
           canBeForNumberInLine[0].getXCoordinate(),
           yCoordinate
         );

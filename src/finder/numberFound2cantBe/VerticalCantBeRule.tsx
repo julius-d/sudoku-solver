@@ -16,7 +16,7 @@ export default class VerticalCantBeRule implements NumberFound2CantBe {
       if (xk !== numberFoundEvent.getPosition().getXCoordinate()) {
         result.push(
           new CantBeFoundEvent(
-            new SudokuPosition(xk, yk),
+            SudokuPosition.of(xk, yk),
             numberFoundEvent.getNumber(),
             this.name
           )

@@ -5,6 +5,7 @@ import SudokuXCoordinate from "../../sudoku/SudokuXCoordinate";
 import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
 import SudokuBox from "../../sudoku/SudokuBox";
 import CantBe2CantBe from "./CantBe2CantBe";
+import {getAllPossiblePositions, getYCoordinatesOf} from "./Utils";
 
 function samePosition(one: SudokuPosition, two: SudokuPosition) {
   return (
@@ -67,24 +68,11 @@ export default class PairBasedExcluderInVerticalLine implements CantBe2CantBe {
   }
 }
 
-function getAllPossiblePositions(notHeres: SudokuPosition[], box: SudokuBox): SudokuPosition[] {
-  return box.allSudokuPositionInThisBox().filter(pos => {
-    notHeres.indexOf(pos) >= 0;
-  });
-}
-
-function getYCoordinatesOf(possiblePositions: SudokuPosition[]): SudokuYCoordinate[] {
-  return distinct(possiblePositions.map(pos => pos.getYCoordinate()));
-}
-
-function distinct<T>(list: Array<T>): Array<T> {
-  return list.filter((e, i, self) => i === self.indexOf(e));
-}
 
 function generateCantBeFoundEventFor(yCoordinatesOfPossiblePositions: SudokuYCoordinate, nTNumber: SudokuNumber, box: SudokuBox): CantBeFoundEvent[] {
   const allXCoords: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   return allXCoords
-    .map(xCooridnate => new SudokuPosition(xCooridnate, yCoordinatesOfPossiblePositions))
-    .filter(it => box.allSudokuPositionInThisBox().indexOf(it) < 0)
+    .map(xCoordinate => SudokuPosition.of(xCoordinate, yCoordinatesOfPossiblePositions))
+    .filter(pos => box.allSudokuPositionInThisBox().indexOf(pos) < 0)
     .map(pos => new CantBeFoundEvent(pos, nTNumber, PairBasedExcluderInVerticalLine.name));
 }

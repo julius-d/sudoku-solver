@@ -9,7 +9,7 @@ addEventListener("message", ({ data }) => {
   console.log("worker got message", data);
 
   let sudokuEvent = new NumberFoundEvent(
-    new SudokuPosition(data.field[0], data.field[1]),
+    SudokuPosition.of(data.field[0], data.field[1]),
     data.value,
     "USER"
   );

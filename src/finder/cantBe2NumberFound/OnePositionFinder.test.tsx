@@ -8,14 +8,14 @@ describe("OnePositionFinder", () => {
     const onePositionFinder = new OnePositionFinder();
     let numberFoundEvents: Array<NumberFoundEvent> = onePositionFinder.finderLogic(
       [
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 1, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 2, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 3, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 4, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 5, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 6, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 7, ""),
-        new CantBeFoundEvent(new SudokuPosition(2, 3), 8, "")
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 1, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 2, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 3, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 4, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 5, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 6, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 7, ""),
+        new CantBeFoundEvent(SudokuPosition.of(2, 3), 8, "")
       ]
     );
 
