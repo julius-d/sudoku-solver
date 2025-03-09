@@ -36,7 +36,12 @@ describe("PairBasedExcluderInVerticalLine", () => {
 
     expect(cantBeFoundEvent.length).toBe(6);
     expect(cantBeFoundEvent[0].getNumber()).toBe(1);
-    expect(cantBeFoundEvent[0].getPosition().getXCoordinate()).toBe(0);
-    expect(cantBeFoundEvent[0].getPosition().getYCoordinate()).toBe(3);
+    const sudokuPositions = cantBeFoundEvent.map(it => it.getPosition());
+    expect(sudokuPositions).toContain(SudokuPosition.of(3, 0));
+    expect(sudokuPositions).toContain(SudokuPosition.of(4, 0));
+    expect(sudokuPositions).toContain(SudokuPosition.of(5, 0));
+    expect(sudokuPositions).toContain(SudokuPosition.of(6, 0));
+    expect(sudokuPositions).toContain(SudokuPosition.of(7, 0));
+    expect(sudokuPositions).toContain(SudokuPosition.of(8, 0));
   });
 });
