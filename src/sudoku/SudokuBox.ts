@@ -26,8 +26,8 @@ export default class SudokuBox {
     return this.y;
   }
 
-  getAll() {
-    return SudokuBox.allInstances;
+  static getAll(): SudokuBox[] {
+    return this.allInstances.flat();
   }
 
   private static createAll() {

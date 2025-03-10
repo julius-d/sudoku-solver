@@ -14,6 +14,7 @@ import CantBe2NumberFound from "../finder/cantBe2NumberFound/CantBe2NumberFound"
 import CantBe2CantBe from "../finder/cantBe2cantBe/CantBe2CantBe";
 import PairBasedExcluderInVerticalLine from "../finder/cantBe2cantBe/PairBasedExcluderInVerticalLine";
 import PairBasedExcluderInHorizontalLine from "../finder/cantBe2cantBe/PairBasedExcluderInHorizontalLine";
+import SubGroupBasedExcluderInBox from "../finder/cantBe2cantBe/SubGroupBasedExcluderInBox";
 
 export default class RuleOrchestration {
   private numberFound2cantBeRules: NumberFound2CantBe[];
@@ -39,6 +40,7 @@ export default class RuleOrchestration {
     this.cantBe2CantBe = [
       new PairBasedExcluderInVerticalLine(),
       new PairBasedExcluderInHorizontalLine(),
+      new SubGroupBasedExcluderInBox(),
     ];
 
     this.eventFilter = new EventFilter();
