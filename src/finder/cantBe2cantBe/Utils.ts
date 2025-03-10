@@ -1,6 +1,7 @@
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuBox from "../../sudoku/SudokuBox";
 import SudokuYCoordinate from "../../sudoku/SudokuYCoordinate";
+import SudokuXCoordinate from "../../sudoku/SudokuXCoordinate";
 
 
 export function getAllPossiblePositions(notHeres: SudokuPosition[], box: SudokuBox): SudokuPosition[] {
@@ -9,6 +10,10 @@ export function getAllPossiblePositions(notHeres: SudokuPosition[], box: SudokuB
 
 export function getYCoordinatesOf(possiblePositions: SudokuPosition[]): SudokuYCoordinate[] {
   return distinct(possiblePositions.map(pos => pos.getYCoordinate()));
+}
+
+export function getXCoordinatesOf(possiblePositions: SudokuPosition[]): SudokuXCoordinate[] {
+  return distinct(possiblePositions.map(pos => pos.getXCoordinate()));
 }
 
 function distinct<T>(list: Array<T>): Array<T> {

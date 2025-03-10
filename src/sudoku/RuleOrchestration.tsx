@@ -13,6 +13,7 @@ import NumberFoundEvent from "./NumberFoundEvent";
 import CantBe2NumberFound from "../finder/cantBe2NumberFound/CantBe2NumberFound";
 import CantBe2CantBe from "../finder/cantBe2cantBe/CantBe2CantBe";
 import PairBasedExcluderInVerticalLine from "../finder/cantBe2cantBe/PairBasedExcluderInVerticalLine";
+import PairBasedExcluderInHorizontalLine from "../finder/cantBe2cantBe/PairBasedExcluderInHorizontalLine";
 
 
 export default class RuleOrchestration {
@@ -38,7 +39,8 @@ export default class RuleOrchestration {
     ];
 
     this.cantBe2CantBe = [
-      new PairBasedExcluderInVerticalLine()
+      new PairBasedExcluderInVerticalLine(),
+      new PairBasedExcluderInHorizontalLine(),
     ]
 
     this.eventFilter = new EventFilter();
@@ -59,13 +61,18 @@ export default class RuleOrchestration {
         }
       }
 
-      for (const rule of this.cantBe2CantBe) {
-        for (const cantBe of cantBeRulesResults) {
-          cantBeRulesResults = cantBeRulesResults.concat(
-            rule.finderLogic(cantBeRulesResults)
-          );
+      let cantBe2CantBeRulesResults: CantBeFoundEvent[] = [];
+      do {
+        cantBe2CantBeRulesResults = [];
+        for (const rule of this.cantBe2CantBe) {
+          for (const cantBe of cantBeRulesResults) {
+            cantBe2CantBeRulesResults = cantBe2CantBeRulesResults.concat(
+              rule.finderLogic(cantBeRulesResults)
+            );
+          }
         }
-      }
+        cantBeRulesResults = cantBeRulesResults.concat(cantBe2CantBeRulesResults);
+      } while (cantBe2CantBeRulesResults.length > 0);
 
       cantBeRulesResults.forEach(it => {
         postMessage(it);
