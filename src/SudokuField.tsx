@@ -29,7 +29,7 @@ function createBorderClassName(rowNumber: number, colNumber: number) {
 }
 
 const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
-  props => {
+  (props) => {
     const {
       rowNumber,
       colNumber,
@@ -38,7 +38,7 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
       handleChange,
       fieldName,
       numberFoundBy,
-      highlight
+      highlight,
     } = props;
 
     const borderClassName = createBorderClassName(rowNumber, colNumber);
@@ -56,7 +56,7 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
           <div
             style={{
               fontSize: 24,
-              fontWeight: numberFoundByUser ? "bold" : "normal"
+              fontWeight: numberFoundByUser ? "bold" : "normal",
             }}
           >
             {foundNumber}
@@ -80,7 +80,7 @@ const SudokuField: React.FunctionComponent<SudokuFieldProps> = React.memo(
         )}
       </td>
     );
-  }
+  },
 );
 
 export default SudokuField;

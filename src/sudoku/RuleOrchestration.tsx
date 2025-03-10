@@ -15,9 +15,7 @@ import CantBe2CantBe from "../finder/cantBe2cantBe/CantBe2CantBe";
 import PairBasedExcluderInVerticalLine from "../finder/cantBe2cantBe/PairBasedExcluderInVerticalLine";
 import PairBasedExcluderInHorizontalLine from "../finder/cantBe2cantBe/PairBasedExcluderInHorizontalLine";
 
-
 export default class RuleOrchestration {
-
   private numberFound2cantBeRules: NumberFound2CantBe[];
   private cantBe2NumberFound: CantBe2NumberFound[];
   private cantBe2CantBe: CantBe2CantBe[];
@@ -28,27 +26,27 @@ export default class RuleOrchestration {
       new BoxCantBeRule(),
       new HorizontalCantBeRule(),
       new VerticalCantBeRule(),
-      new OnePositionCantBeRule()
+      new OnePositionCantBeRule(),
     ];
 
     this.cantBe2NumberFound = [
       new OnlyOnePlaceHorizontalLine(),
       new OnlyOnePlaceVerticalLine(),
       new OnlyOnePlaceBox(),
-      new OnePositionFinder()
+      new OnePositionFinder(),
     ];
 
     this.cantBe2CantBe = [
       new PairBasedExcluderInVerticalLine(),
       new PairBasedExcluderInHorizontalLine(),
-    ]
+    ];
 
     this.eventFilter = new EventFilter();
   }
 
   handleGivenNumber(
     numberFoundEvent: NumberFoundEvent,
-    postMessage: (e: CantBeFoundEvent | NumberFoundEvent) => void
+    postMessage: (e: CantBeFoundEvent | NumberFoundEvent) => void,
   ) {
     let foundNumbers = this.eventFilter.removeAlreadySeen([numberFoundEvent]);
     do {
@@ -56,7 +54,7 @@ export default class RuleOrchestration {
       for (const rule of this.numberFound2cantBeRules) {
         for (const foundNumber of foundNumbers) {
           cantBeRulesResults = cantBeRulesResults.concat(
-            rule.finderLogic(foundNumber)
+            rule.finderLogic(foundNumber),
           );
         }
       }
@@ -67,25 +65,27 @@ export default class RuleOrchestration {
         for (const rule of this.cantBe2CantBe) {
           for (const cantBe of cantBeRulesResults) {
             cantBe2CantBeRulesResults = cantBe2CantBeRulesResults.concat(
-              rule.finderLogic(cantBeRulesResults)
+              rule.finderLogic(cantBeRulesResults),
             );
           }
         }
-        cantBeRulesResults = cantBeRulesResults.concat(cantBe2CantBeRulesResults);
+        cantBeRulesResults = cantBeRulesResults.concat(
+          cantBe2CantBeRulesResults,
+        );
       } while (cantBe2CantBeRulesResults.length > 0);
 
-      cantBeRulesResults.forEach(it => {
+      cantBeRulesResults.forEach((it) => {
         postMessage(it);
       });
 
       foundNumbers = [];
       for (const rule of this.cantBe2NumberFound) {
         foundNumbers = foundNumbers.concat(
-          rule.finderLogic(cantBeRulesResults)
+          rule.finderLogic(cantBeRulesResults),
         );
       }
       foundNumbers = this.eventFilter.removeAlreadySeen(foundNumbers);
-      foundNumbers.forEach(foundNumbers => {
+      foundNumbers.forEach((foundNumbers) => {
         postMessage(foundNumbers);
       });
     } while (foundNumbers.length > 0);

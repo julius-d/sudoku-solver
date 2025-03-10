@@ -33,8 +33,8 @@ export default class SudokuBox {
   private static createAll() {
     const allBoxCoordinates: BoxCoordinate[] = [0, 1, 2];
     const all: SudokuBox[][] = [[], [], []];
-    allBoxCoordinates.forEach(x => {
-      allBoxCoordinates.forEach(y => {
+    allBoxCoordinates.forEach((x) => {
+      allBoxCoordinates.forEach((y) => {
         all[x][y] = new SudokuBox(x, y);
       });
     });
@@ -50,7 +50,7 @@ export default class SudokuBox {
   }
 
   private static boxCoordinateFor(
-    coordinate: SudokuXCoordinate | SudokuYCoordinate
+    coordinate: SudokuXCoordinate | SudokuYCoordinate,
   ) {
     if (coordinate === 0 || coordinate === 1 || coordinate === 2) {
       return 0;
@@ -62,7 +62,7 @@ export default class SudokuBox {
   }
 
   private static sudokuCoordinateFor(
-    coordinate: BoxCoordinate
+    coordinate: BoxCoordinate,
   ): Array<SudokuXCoordinate | SudokuYCoordinate> {
     if (coordinate === 0) {
       return [0, 1, 2];
@@ -79,8 +79,8 @@ export default class SudokuBox {
 
   allSudokuPositionInThisBox() {
     let result: SudokuPosition[] = [];
-    SudokuBox.sudokuCoordinateFor(this.y).forEach(yC => {
-      SudokuBox.sudokuCoordinateFor(this.x).forEach(xC => {
+    SudokuBox.sudokuCoordinateFor(this.y).forEach((yC) => {
+      SudokuBox.sudokuCoordinateFor(this.x).forEach((xC) => {
         const position = SudokuPosition.of(xC, yC);
         result.push(position);
       });

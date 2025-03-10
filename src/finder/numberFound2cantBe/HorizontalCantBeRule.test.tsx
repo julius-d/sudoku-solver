@@ -7,7 +7,7 @@ describe("HorizontalCantBeRule", () => {
 
   it("sends 8", () => {
     let results = rule.finderLogic(
-      new NumberFoundEvent(SudokuPosition.of(1, 2), 3, "")
+      new NumberFoundEvent(SudokuPosition.of(1, 2), 3, ""),
     );
     expect(results.length).toBe(8);
   });

@@ -26,7 +26,7 @@ describe("RuleOrchestration", () => {
       "______216",
       "3__685_7_",
       "_____4_91",
-      "6____2___"
+      "6____2___",
     ]);
 
     thenSolutionIs([
@@ -38,7 +38,7 @@ describe("RuleOrchestration", () => {
       "735849216",
       "391685472",
       "258374691",
-      "647912385"
+      "647912385",
     ]);
   });
 
@@ -64,16 +64,15 @@ describe("RuleOrchestration", () => {
       "_9_25_14_",
       "_3_8_2_9_",
       "_895_6_7_",
-      "_163798_4"
+      "_163798_4",
     ]);
   });
 
   function handleEvent(numberFoundEvent: NumberFoundEvent | CantBeFoundEvent) {
     if (numberFoundEvent.type === SudokuEventType.NUMBER_FOUND) {
       let position = numberFoundEvent.getPosition();
-      field[position.getXCoordinate()][
-        position.getYCoordinate()
-        ] = numberFoundEvent.getNumber().toString(10);
+      field[position.getXCoordinate()][position.getYCoordinate()] =
+        numberFoundEvent.getNumber().toString(10);
     }
   }
 
@@ -86,10 +85,10 @@ describe("RuleOrchestration", () => {
             let numberFoundEvent = new NumberFoundEvent(
               SudokuPosition.of(
                 lineIndex as SudokuXCoordinate,
-                rowIndex as SudokuYCoordinate
+                rowIndex as SudokuYCoordinate,
               ),
               parseInt(givenNumber, 10) as SudokuNumber,
-              "USER"
+              "USER",
             );
             ruleOrchestration.handleGivenNumber(numberFoundEvent, handleEvent);
           }
@@ -99,7 +98,7 @@ describe("RuleOrchestration", () => {
   }
 
   function thenSolutionIs(expected: string[]) {
-    let solution: string[] = field.map(row => row.join(""));
+    let solution: string[] = field.map((row) => row.join(""));
     expect(solution).toEqual(expected);
   }
 });

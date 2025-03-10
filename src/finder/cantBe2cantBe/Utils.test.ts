@@ -1,4 +1,8 @@
-import { getAllPossiblePositions, getYCoordinatesOf, getXCoordinatesOf } from "./Utils";
+import {
+  getAllPossiblePositions,
+  getYCoordinatesOf,
+  getXCoordinatesOf,
+} from "./Utils";
 import SudokuPosition from "../../sudoku/SudokuPosition";
 import SudokuBox from "../../sudoku/SudokuBox";
 
@@ -11,7 +15,7 @@ describe("Utils", () => {
         SudokuPosition.of(0, 2),
         SudokuPosition.of(1, 0),
         SudokuPosition.of(1, 1),
-        SudokuPosition.of(1, 2)
+        SudokuPosition.of(1, 2),
       ];
       const box = SudokuBox.createByPosition(SudokuPosition.of(0, 0));
       const possiblePositions = getAllPossiblePositions(notHeres, box);
@@ -26,7 +30,7 @@ describe("Utils", () => {
       const positions: SudokuPosition[] = [
         SudokuPosition.of(0, 0),
         SudokuPosition.of(1, 0),
-        SudokuPosition.of(2, 0)
+        SudokuPosition.of(2, 0),
       ];
       const yCoordinates = getYCoordinatesOf(positions);
       expect(yCoordinates).toContain(0);
@@ -61,7 +65,7 @@ describe("Utils", () => {
       const positions: SudokuPosition[] = [
         SudokuPosition.of(0, 0),
         SudokuPosition.of(0, 1),
-        SudokuPosition.of(0, 2)
+        SudokuPosition.of(0, 2),
       ];
       const xCoordinates = getXCoordinatesOf(positions);
       expect(xCoordinates).toContain(0);

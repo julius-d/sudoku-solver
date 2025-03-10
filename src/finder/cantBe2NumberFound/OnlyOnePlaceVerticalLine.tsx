@@ -28,9 +28,9 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
       SudokuYCoordinate,
       Map<SudokuNumber, Array<SudokuPosition>>
     >();
-    sudokuYCoordinates.forEach(x => {
+    sudokuYCoordinates.forEach((x) => {
       let map1 = new Map<SudokuNumber, Array<SudokuPosition>>();
-      numbers.forEach(i => {
+      numbers.forEach((i) => {
         map1.set(i, []);
       });
       memory.set(x, map1);
@@ -40,16 +40,16 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
 
   finderLogic(cantBes: Array<CantBeFoundEvent>): Array<NumberFoundEvent> {
     const result: Array<NumberFoundEvent> = [];
-    cantBes.forEach(cantBe => {
+    cantBes.forEach((cantBe) => {
       const canBeForNumberInLine =
         this.memory
           .get(cantBe.getPosition().getYCoordinate())
           ?.get(cantBe.getNumber()) || []; // TODO handle undefined
       if (
         !canBeForNumberInLine.find(
-          it =>
+          (it) =>
             it.getXCoordinate() === cantBe.getPosition().getXCoordinate() &&
-            it.getYCoordinate() === cantBe.getPosition().getYCoordinate()
+            it.getYCoordinate() === cantBe.getPosition().getYCoordinate(),
         )
       ) {
         canBeForNumberInLine.push(cantBe.getPosition());
@@ -57,11 +57,11 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
           result.push(
             new NumberFoundEvent(
               OnlyOnePlaceVerticalLine.onlyPossiblePosition(
-                canBeForNumberInLine
+                canBeForNumberInLine,
               ),
               cantBe.getNumber(),
-              this.name
-            )
+              this.name,
+            ),
           );
         }
       }
@@ -70,17 +70,17 @@ export default class OnlyOnePlaceVerticalLine implements CantBe2NumberFound {
   }
 
   private static onlyPossiblePosition(
-    canBeForNumberInLine: SudokuPosition[]
+    canBeForNumberInLine: SudokuPosition[],
   ): SudokuPosition {
     const xCoordinates: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     for (let i = 0; i < xCoordinates.length; i++) {
       let xCoordinate = xCoordinates[i];
       if (
-        !canBeForNumberInLine.find(it => it.getXCoordinate() === xCoordinate)
+        !canBeForNumberInLine.find((it) => it.getXCoordinate() === xCoordinate)
       ) {
         return SudokuPosition.of(
           xCoordinate,
-          canBeForNumberInLine[0].getYCoordinate()
+          canBeForNumberInLine[0].getYCoordinate(),
         );
       }
     }

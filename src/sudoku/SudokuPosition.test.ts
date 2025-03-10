@@ -2,9 +2,7 @@ import SudokuPosition from "./SudokuPosition";
 import SudokuXCoordinate from "./SudokuXCoordinate";
 import SudokuYCoordinate from "./SudokuYCoordinate";
 
-
 describe("SudokuPosition", () => {
-
   it("equals itself", () => {
     const sudokuPosition1 = SudokuPosition.of(0, 0);
     const sudokuPosition2 = SudokuPosition.of(0, 0);
@@ -31,5 +29,4 @@ describe("SudokuPosition", () => {
       }
     }
   });
-
 });

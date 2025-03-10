@@ -21,8 +21,8 @@ export default class BoxCantBeRule implements NumberFound2CantBe {
           new CantBeFoundEvent(
             position,
             numberFoundEvent.getNumber(),
-            this.ruleName
-          )
+            this.ruleName,
+          ),
         );
       }
     }

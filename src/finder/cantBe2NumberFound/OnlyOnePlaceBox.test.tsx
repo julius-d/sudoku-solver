@@ -9,12 +9,12 @@ describe("OnlyOnePlaceBox", () => {
   it("finds", () => {
     function cantBeNumber1AtPosition(
       xCoordinate: SudokuXCoordinate,
-      yCoordinate: SudokuYCoordinate
+      yCoordinate: SudokuYCoordinate,
     ) {
       return new CantBeFoundEvent(
         SudokuPosition.of(xCoordinate, yCoordinate),
         1,
-        ""
+        "",
       );
     }
 
@@ -27,7 +27,7 @@ describe("OnlyOnePlaceBox", () => {
       cantBeNumber1AtPosition(1, 2),
       cantBeNumber1AtPosition(2, 1),
       cantBeNumber1AtPosition(2, 2),
-      cantBeNumber1AtPosition(0, 2)
+      cantBeNumber1AtPosition(0, 2),
     ]);
 
     expect(numberFoundEvents.length).toBe(1);

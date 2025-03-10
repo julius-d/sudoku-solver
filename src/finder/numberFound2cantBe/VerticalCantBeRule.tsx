@@ -12,14 +12,14 @@ export default class VerticalCantBeRule implements NumberFound2CantBe {
     const xCoordinates: SudokuXCoordinate[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     let yk = numberFoundEvent.getPosition().getYCoordinate();
-    xCoordinates.forEach(xk => {
+    xCoordinates.forEach((xk) => {
       if (xk !== numberFoundEvent.getPosition().getXCoordinate()) {
         result.push(
           new CantBeFoundEvent(
             SudokuPosition.of(xk, yk),
             numberFoundEvent.getNumber(),
-            this.name
-          )
+            this.name,
+          ),
         );
       }
     });
