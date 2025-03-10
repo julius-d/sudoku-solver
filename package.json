@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "29.2.3",
-    "@types/node": "18.11.9",
+    "@types/jest": "29.5.14",
+    "@types/node": "22.13.10",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
     "react": "18.2.0",
@@ -42,6 +42,6 @@
     "worker-loader": "3.0.8",
     "husky": "8.0.2",
     "lint-staged": "13.0.3",
-    "prettier": "2.7.1"
+    "prettier": "3.5.3"
   }
 }
