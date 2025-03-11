@@ -64,4 +64,53 @@ describe("SubGroupBasedExcluderInBox", () => {
     expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(2, 2));
 
   });
+
+  it("return only exclusions for boxes affected of new CantBeFoundEvent", () => {
+    let subGroupBasedExcluderInBox = new SubGroupBasedExcluderInBox();
+    let cantBeFoundEvent: CantBeFoundEvent[] =
+      subGroupBasedExcluderInBox.finderLogic([
+        numberNotPossible(2, pos(0, 0)),
+        numberNotPossible(3, pos(0, 0)),
+        numberNotPossible(4, pos(0, 0)),
+        numberNotPossible(5, pos(0, 0)),
+        numberNotPossible(6, pos(0, 0)),
+        numberNotPossible(7, pos(0, 0)),
+        numberNotPossible(8, pos(0, 0)),
+
+        numberNotPossible(2, pos(2, 1)),
+        numberNotPossible(3, pos(2, 1)),
+        numberNotPossible(4, pos(2, 1)),
+        numberNotPossible(5, pos(2, 1)),
+        numberNotPossible(6, pos(2, 1)),
+        numberNotPossible(7, pos(2, 1)),
+        numberNotPossible(8, pos(2, 1)),
+
+      ]);
+
+    expect(cantBeFoundEvent.length).toBe(14);
+
+    const newCantBeFoundEvents = subGroupBasedExcluderInBox.finderLogic([
+      numberNotPossible(2, pos(0, 0))]);
+
+    expect(newCantBeFoundEvents.length).toBe(0);
+  })
+
+
+  it("finds no exclusions when no pairs are present", () => {
+    let subGroupBasedExcluderInBox = new SubGroupBasedExcluderInBox();
+    let cantBeFoundEvent: CantBeFoundEvent[] =
+      subGroupBasedExcluderInBox.finderLogic([
+        numberNotPossible(2, pos(0, 0)),
+        numberNotPossible(3, pos(0, 1)),
+        numberNotPossible(4, pos(0, 2)),
+        numberNotPossible(5, pos(1, 0)),
+        numberNotPossible(6, pos(1, 1)),
+        numberNotPossible(7, pos(1, 2)),
+        numberNotPossible(8, pos(2, 0)),
+        numberNotPossible(9, pos(2, 1)),
+      ]);
+
+    expect(cantBeFoundEvent.length).toBe(0);
+  });
+
 });
