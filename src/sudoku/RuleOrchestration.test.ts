@@ -6,6 +6,7 @@ import CantBeFoundEvent from "./CantBeFoundEvent";
 import SudokuNumber from "./SudokuNumber";
 import SudokuXCoordinate from "./SudokuXCoordinate";
 import SudokuYCoordinate from "./SudokuYCoordinate";
+import {isValidSudoku} from "./ResultValidator";
 
 describe("RuleOrchestration", () => {
   let ruleOrchestration: RuleOrchestration;
@@ -57,7 +58,7 @@ describe("RuleOrchestration", () => {
       │ _ 7 _ │ _ _ _ │ _ 8 _ │
       │ _ _ _ │ 6 _ 5 │ _ 1 _ │
       ├───────┼───────┼───────┤
-      │ _ _ 4 │ _ 6 _ │ _ _ 3 │
+      │ _ _ 4 │ _ 6 _ │ _ 3 _ │
       │ 1 _ _ │ _ 9 _ │ _ _ 2 │
       │ _ 9 _ │ _ 5 _ │ 1 _ _ │
       ├───────┼───────┼───────┤
@@ -69,17 +70,17 @@ describe("RuleOrchestration", () => {
 
     thenSolutionIs(`
       ┌───────┬───────┬───────┐
-      │ 9 6 5 │ 7 2 1 │ 4 3 6 │
-      │ 6 7 1 │ 9 3 4 │ 2 8 5 │
-      │ 3 4 2 │ 6 8 5 │ 9 1 7 │
+      │ 9 _ _ │ 7 _ 1 │ 4 _ _ │
+      │ _ 7 1 │ 9 _ 4 │ _ 8 _ │
+      │ _ 4 _ │ 6 _ 5 │ _ 1 _ │
       ├───────┼───────┼───────┤
-      │ 8 2 4 │ 1 6 7 │ 5 9 3 │
-      │ 1 5 3 │ 4 9 8 │ 7 6 2 │
-      │ 6 9 7 │ 2 5 3 │ 1 4 8 │
+      │ _ 2 4 │ 1 6 _ │ _ 3 _ │
+      │ 1 _ _ │ 4 9 _ │ _ _ 2 │
+      │ _ 9 _ │ 2 5 _ │ 1 4 _ │
       ├───────┼───────┼───────┤
-      │ 4 3 7 │ 8 1 2 │ 6 5 9 │
-      │ 2 8 9 │ 5 4 6 │ 3 7 1 │
-      │ 5 1 6 │ 3 7 9 │ 8 2 4 │
+      │ _ 3 _ │ 8 _ 2 │ _ 9 _ │
+      │ _ 8 9 │ 5 _ 6 │ _ 7 _ │
+      │ _ 1 6 │ 3 7 9 │ 8 _ 4 │
       └───────┴───────┴───────┘
     `);
   });
@@ -87,10 +88,20 @@ describe("RuleOrchestration", () => {
   function handleEvent(numberFoundEvent: NumberFoundEvent | CantBeFoundEvent) {
     if (numberFoundEvent.type === SudokuEventType.NUMBER_FOUND) {
       let position = numberFoundEvent.getPosition();
-      field[position.getXCoordinate()][position.getYCoordinate()] =
-        numberFoundEvent.getNumber().toString(10);
+      let existingValue = field[position.getXCoordinate()][position.getYCoordinate()];
+      let newValue = numberFoundEvent.getNumber().toString(10);
+      if (!!existingValue && existingValue !== '_' && existingValue !== newValue) {
+        throw new Error(`Conflict at position (${position.getXCoordinate()}, ${position.getYCoordinate()}): existing value ${existingValue}, new value ${newValue}`);
+      } else {
+        field[position.getXCoordinate()][position.getYCoordinate()] = newValue;
+        if (!isValidSudoku(field)) {
+          console.log("Invalid: " + formatFoundNumbers());
+          throw new Error(`Invalid Sudoku state after placing ${newValue} at position (${position.getXCoordinate()}, ${position.getYCoordinate()}) rule: ${numberFoundEvent.getFrom()}`);
+        }
+      }
     }
   }
+
 
   function givenNumbers(lines: string) {
     const formattedLines = lines.replace(/[^0-9_]/g, "").match(/.{1,9}/g) || [];
@@ -107,6 +118,7 @@ describe("RuleOrchestration", () => {
               parseInt(givenNumber, 10) as SudokuNumber,
               "USER",
             );
+            handleEvent(numberFoundEvent);
             ruleOrchestration.handleGivenNumber(numberFoundEvent, handleEvent);
           }
         }
@@ -116,6 +128,9 @@ describe("RuleOrchestration", () => {
 
   function thenSolutionIs(expected: string) {
     const solution = formatFoundNumbers();
+    if (!isValidSudoku(field)) {
+      throw new Error(`invalid solution ${solution}`)
+    }
     const trimmedExpected = expected.trim().split('\n').map(line => line.trim()).join('\n');
     expect(solution).toEqual(trimmedExpected);
   }
