@@ -14,7 +14,7 @@ describe("SubGroupBasedExcluderInBox", () => {
     return SudokuPosition.of(x, y);
   }
 
-  it("finds exclusions", () => {
+  it("finds exclusions for 2 numbers only possible in 2 positions", () => {
     let subGroupBasedExcluderInBox = new SubGroupBasedExcluderInBox();
     let cantBeFoundEvent: CantBeFoundEvent[] =
       subGroupBasedExcluderInBox.finderLogic([
@@ -62,6 +62,71 @@ describe("SubGroupBasedExcluderInBox", () => {
     expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(1, 2));
     expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(2, 0));
     expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(2, 2));
+
+  })
+
+  it("finds exclusions for 3 numbers only possible in 3 positions", () => {
+    let subGroupBasedExcluderInBox = new SubGroupBasedExcluderInBox();
+    let cantBeFoundEvent: CantBeFoundEvent[] =
+      subGroupBasedExcluderInBox.finderLogic([
+        numberNotPossible(2, pos(0, 0)),
+        numberNotPossible(3, pos(0, 0)),
+        numberNotPossible(4, pos(0, 0)),
+        numberNotPossible(5, pos(0, 0)),
+        numberNotPossible(6, pos(0, 0)),
+        numberNotPossible(7, pos(0, 0)),
+
+        numberNotPossible(2, pos(2, 1)),
+        numberNotPossible(3, pos(2, 1)),
+        numberNotPossible(4, pos(2, 1)),
+        numberNotPossible(5, pos(2, 1)),
+        numberNotPossible(6, pos(2, 1)),
+        numberNotPossible(7, pos(2, 1)),
+
+        numberNotPossible(2, pos(1, 1)),
+        numberNotPossible(3, pos(1, 1)),
+        numberNotPossible(4, pos(1, 1)),
+        numberNotPossible(5, pos(1, 1)),
+        numberNotPossible(6, pos(1, 1)),
+        numberNotPossible(7, pos(1, 1)),
+      ]);
+
+    expect(cantBeFoundEvent.length).toBe(18);
+
+    const cantBeFoundEventForNumber1 = cantBeFoundEvent
+      .filter((it) => it.getNumber() === 1)
+      .map((it) => it.getPosition());
+    const cantBeFoundEventForNumber9 = cantBeFoundEvent
+      .filter((it) => it.getNumber() === 9)
+      .map((it) => it.getPosition());
+    const cantBeFoundEventForNumber8 = cantBeFoundEvent
+      .filter((it) => it.getNumber() === 8)
+      .map((it) => it.getPosition());
+
+    expect(cantBeFoundEventForNumber1.length).toBe(6);
+    expect(cantBeFoundEventForNumber9.length).toBe(6);
+    expect(cantBeFoundEventForNumber8.length).toBe(6);
+
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(0, 1));
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(0, 2));
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(1, 0));
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(1, 2));
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(2, 0));
+    expect(cantBeFoundEventForNumber1).toContain(SudokuPosition.of(2, 2));
+
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(0, 1));
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(0, 2));
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(1, 0));
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(1, 2));
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(2, 0));
+    expect(cantBeFoundEventForNumber9).toContain(SudokuPosition.of(2, 2));
+
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(0, 1));
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(0, 2));
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(1, 0));
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(1, 2));
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(2, 0));
+    expect(cantBeFoundEventForNumber8).toContain(SudokuPosition.of(2, 2));
 
   });
 
