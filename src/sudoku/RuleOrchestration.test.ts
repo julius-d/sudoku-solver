@@ -17,55 +17,71 @@ describe("RuleOrchestration", () => {
   });
 
   it("solves sudoku", () => {
-    givenNumbers([
-      "_1_4__82_",
-      "_8_1__5_9",
-      "97_______",
-      "8_4_6____",
-      "__9_2__4_",
-      "______216",
-      "3__685_7_",
-      "_____4_91",
-      "6____2___",
-    ]);
+    givenNumbers(`
+      ┌───────┬───────┬───────┐
+      │ _ 1 _ │ 4 _ _ │ 8 2 _ │
+      │ _ 8 _ │ 1 _ _ │ 5 _ 9 │
+      │ 9 7 _ │ _ _ _ │ _ _ _ │
+      ├───────┼───────┼───────┤
+      │ 8 _ 4 │ _ 6 _ │ _ _ _ │
+      │ _ _ 9 │ _ 2 _ │ _ 4 _ │
+      │ _ _ _ │ _ _ _ │ 2 1 6 │
+      ├───────┼───────┼───────┤
+      │ 3 _ _ │ 6 8 5 │ _ 7 _ │
+      │ _ _ _ │ _ _ 4 │ _ 9 1 │
+      │ 6 _ _ │ _ _ 2 │ _ _ _ │
+      └───────┴───────┴───────┘
+    `);
 
-    thenSolutionIs([
-      "513496827",
-      "482137569",
-      "976258134",
-      "824761953",
-      "169523748",
-      "735849216",
-      "391685472",
-      "258374691",
-      "647912385",
-    ]);
+    thenSolutionIs(`
+      ┌───────┬───────┬───────┐
+      │ 5 1 3 │ 4 9 6 │ 8 2 7 │
+      │ 4 8 2 │ 1 3 7 │ 5 6 9 │
+      │ 9 7 6 │ 2 5 8 │ 1 3 4 │
+      ├───────┼───────┼───────┤
+      │ 8 2 4 │ 7 6 1 │ 9 5 3 │
+      │ 1 6 9 │ 5 2 3 │ 7 4 8 │
+      │ 7 3 5 │ 8 4 9 │ 2 1 6 │
+      ├───────┼───────┼───────┤
+      │ 3 9 1 │ 6 8 5 │ 4 7 2 │
+      │ 2 5 8 │ 3 7 4 │ 6 9 1 │
+      │ 6 4 7 │ 9 1 2 │ 3 8 5 │
+      └───────┴───────┴───────┘
+    `);
   });
 
   it("solves hard sudoku", () => {
-    givenNumbers([
-      "9____14__",
-      "_7_____8_",
-      "___6_5_1_",
-      "__4_6__3_",
-      "1___9___2",
-      "_9__5_1__",
-      "_3_8_2___",
-      "_8_____7_",
-      "__63____4",
-    ]);
+    givenNumbers(`
+      ┌───────┬───────┬───────┐
+      │ 9 _ _ │ _ _ 1 │ 4 _ _ │
+      │ _ 7 _ │ _ _ _ │ _ 8 _ │
+      │ _ _ _ │ 6 _ 5 │ _ 1 _ │
+      ├───────┼───────┼───────┤
+      │ _ _ 4 │ _ 6 _ │ _ _ 3 │
+      │ 1 _ _ │ _ 9 _ │ _ _ 2 │
+      │ _ 9 _ │ _ 5 _ │ 1 _ _ │
+      ├───────┼───────┼───────┤
+      │ _ 3 _ │ 8 _ 2 │ _ _ _ │
+      │ _ 8 _ │ _ _ _ │ _ 7 _ │
+      │ _ _ 6 │ 3 _ _ │ _ _ 4 │
+      └───────┴───────┴───────┘
+    `);
 
-    thenSolutionIs([
-      "9__7_14__",
-      "_719_4_8_",
-      "_4_6_5_1_",
-      "_2416__3_",
-      "1__49___2",
-      "_9_25_14_",
-      "_3_8_2_9_",
-      "_895_6_7_",
-      "_163798_4",
-    ]);
+    thenSolutionIs(`
+      ┌───────┬───────┬───────┐
+      │ 9 6 5 │ 7 2 1 │ 4 3 6 │
+      │ 6 7 1 │ 9 3 4 │ 2 8 5 │
+      │ 3 4 2 │ 6 8 5 │ 9 1 7 │
+      ├───────┼───────┼───────┤
+      │ 8 2 4 │ 1 6 7 │ 5 9 3 │
+      │ 1 5 3 │ 4 9 8 │ 7 6 2 │
+      │ 6 9 7 │ 2 5 3 │ 1 4 8 │
+      ├───────┼───────┼───────┤
+      │ 4 3 7 │ 8 1 2 │ 6 5 9 │
+      │ 2 8 9 │ 5 4 6 │ 3 7 1 │
+      │ 5 1 6 │ 3 7 9 │ 8 2 4 │
+      └───────┴───────┴───────┘
+    `);
   });
 
   function handleEvent(numberFoundEvent: NumberFoundEvent | CantBeFoundEvent) {
@@ -76,8 +92,9 @@ describe("RuleOrchestration", () => {
     }
   }
 
-  function givenNumbers(lines: string[]) {
-    lines.forEach((line, lineIndex) => {
+  function givenNumbers(lines: string) {
+    const formattedLines = lines.replace(/[^0-9_]/g, "").match(/.{1,9}/g) || [];
+    formattedLines.forEach((line, lineIndex) => {
       line.split("").forEach((givenNumber, rowIndex) => {
         if (!field[lineIndex][rowIndex]) {
           field[lineIndex][rowIndex] = givenNumber;
@@ -97,8 +114,29 @@ describe("RuleOrchestration", () => {
     });
   }
 
-  function thenSolutionIs(expected: string[]) {
-    let solution: string[] = field.map((row) => row.join(""));
-    expect(solution).toEqual(expected);
+  function thenSolutionIs(expected: string) {
+    const solution = formatFoundNumbers();
+    const trimmedExpected = expected.trim().split('\n').map(line => line.trim()).join('\n');
+    expect(solution).toEqual(trimmedExpected);
   }
+
+  function formatFoundNumbers(): string {
+    const horizontalDivider = '├───────┼───────┼───────┤';
+    const topBorder = '┌───────┬───────┬───────┐';
+    const bottomBorder = '└───────┴───────┴───────┘';
+
+    const formattedRows = field.map((row, index) => {
+      const formattedRow = '│ ' + row.map((cell, i) => {
+        const separator = (i === 2 || i === 5) ? ' │ ' : ' ';
+        return (cell || '_') + separator;
+      }).join('') + '│';
+      if (index === 2 || index === 5) {
+        return formattedRow + '\n' + horizontalDivider;
+      }
+      return formattedRow;
+    });
+
+    return [topBorder, ...formattedRows, bottomBorder].join('\n');
+  }
+
 });
