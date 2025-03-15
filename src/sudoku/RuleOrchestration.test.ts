@@ -121,8 +121,8 @@ describe("RuleOrchestration", () => {
   }
 
   function formatFoundNumbers(): string {
-    const horizontalDivider = '├───────┼───────┼───────┤';
     const topBorder = '┌───────┬───────┬───────┐';
+    const horizontalDivider = '├───────┼───────┼───────┤';
     const bottomBorder = '└───────┴───────┴───────┘';
 
     const formattedRows = field.map((row, index) => {
